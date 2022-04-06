@@ -21,14 +21,29 @@ img {
     width: 100%;
   }
 
+  .btnsDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+  }
+
   .betBtn {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
+    margin: 0 10px;
   }
 
   .dealBtn {
     width: 80px;
     height: 40px;
+  }
+
+  .card {
+    width: auto;
+    height: 100px;
+    margin: 0 10px;
   }
 }
