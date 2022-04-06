@@ -7,10 +7,17 @@
 body {
   width: 100vw;
   height: auto;
+  text-align: center;
+}
+
+img {
+  width: 20px;
+  height: auto;
 }
 
 @media screen and (orientation: landscape) {
   body {
     height: 100%;
+    width: 100%;
   }
 }
