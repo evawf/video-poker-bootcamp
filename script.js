@@ -7,6 +7,8 @@ const scoreBoardDiv = document.createElement("div");
 scoreBoardDiv.className = "scoreBoardDiv";
 scoreBoardDiv.innerText = "Score Board";
 
+// winning conditions in scoreBoard - do later
+
 const handDiv = document.createElement("div");
 handDiv.className = "handDiv";
 handDiv.innerText = "Hand";
@@ -35,7 +37,7 @@ btn5.innerText = "50";
 
 betBtnDiv.append(btn1, btn2, btn3, btn4, btn5);
 
-const dealBtn = document.createElement("div");
+const dealBtn = document.createElement("button");
 dealBtn.className = "dealBtn";
 dealBtn.id = "dealBtn";
 dealBtn.innerText = "Deal";
@@ -81,6 +83,7 @@ const makeDeck = () => {
         suit: currentSuit,
         suitsSymbol: currentSuitSymbol,
         rank: rankCounter,
+        img: "imgs/" + `${cardName}` + "_of_" + `${currentSuit}` + ".png",
       };
       deck.push(card);
     }
@@ -98,16 +101,22 @@ Game logic
 */
 const playerHand = [];
 let coins = 100;
+let rankCounter = {};
+let suitCounter = 0;
+let sequentialChecker = 0; // To check later
 
+// Deal cards
 for (let i = 0; i < 5; i += 1) {
   playerHand.push(newDeck.pop());
 }
 
+// Check player hand point
 const calcHandScore = (playerHand) => {
   console.log(playerHand);
+
   let score = 0;
 
   return score;
 };
 
-// calcHandScore(playerHand);
+calcHandScore(playerHand);

@@ -20,4 +20,15 @@ img {
     height: 100%;
     width: 100%;
   }
+
+  .betBtn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
+
+  .dealBtn {
+    width: 80px;
+    height: 40px;
+  }
 }
