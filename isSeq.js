@@ -2,14 +2,12 @@ const isSequential = (playerHand) => {
   playerHand.sort((a, b) => (a.rank > b.rank ? 1 : -1));
   let seq = true;
   let temp = playerHand[0].rank;
-  console.log(playerHand);
   for (let i = 1; i < playerHand.length; i += 1) {
     if (playerHand[i].rank - temp !== 1) {
       seq = false;
       break;
     } else {
       temp = playerHand[i].rank;
-      console.log(temp);
     }
   }
 
@@ -26,3 +24,5 @@ const isSequential = (playerHand) => {
 
   return seq;
 };
+
+// export { isSequential };

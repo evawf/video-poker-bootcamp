@@ -96,6 +96,7 @@ Game logic
 */
 let playerHand = [];
 let coins = 100;
+let bet = 1;
 
 // Display cards back
 for (let i = 0; i < 5; i += 1) {
@@ -109,6 +110,7 @@ for (let i = 0; i < 5; i += 1) {
 // Check player hand point
 const calcHandScore = (playerHand) => {
   // sort ranks
+  let score = 0;
   let sortedRank = {};
   for (let idx = 0; idx < playerHand.length; idx += 1) {
     let rank = playerHand[idx].rank;
@@ -119,41 +121,66 @@ const calcHandScore = (playerHand) => {
     }
   }
 
-  // sort suits
-  let sortedSuit = {};
-  for (let idx = 0; idx < playerHand.length; idx += 1) {
-    let suit = playerHand[idx].suit;
-    if (suit in sortedSuit) {
-      sortedSuit[suit] += 1;
-    } else {
-      sortedSuit[suit] = 1;
-    }
-  }
-
-  let seq = isSequential(playerHand);
   // check if hand is sequential
-  // const isSequential = (playerHand) => {
-  //   playerHand.sort((a, b) => (a.rank > b.rank ? 1 : -1));
-  //   let isSeq = true;
-  //   for (let i = 1; i < playerHand.length - 1; i += 1) {
-  //     if (playerHand[i + 1].rank - playerHand[i].rank !== 1) {
-  //       isSeq = false;
-  //       break;
-  //     }
-  //   }
-  //   return isSeq;
-  // };
+  let seq = isSequential(playerHand);
+  // check if same suit
+  let sameSuit = isSameSuit(playerHand);
 
   console.log(sortedRank);
-  console.log(sortedSuit);
-  console.log(seq);
+  // console.log(sameSuit);
+  // console.log(seq);
+  // console.log(playerHand);
 
   // Winning conditions:
-  for (let i = 1; i <= 13; i += 1) {}
+  // Royal Flush - 250 * bet
+  if (
+    seq === true &&
+    sameSuit === true &&
+    playerHand[playerHand.length - 1].rank === 13
+  ) {
+    score = 250;
+  }
 
-  // Royal Flush
-  // if(sortedRank.length ===1 && )
-  let score = 0;
+  // Straight Flush - 50 * bet
+  if (seq === true && sameSuit === true) score = 50;
+
+  // Four of a kind - 25 * bet
+  let key;
+  for (let i = 0; i < playerHand.length; i += 1) {
+    if (sortedRank.key === 4) score = 25;
+  }
+
+  // Full House - 10 * bet
+  let numOfKeys = Object.keys(sortedRank).length;
+  console.log(numOfKeys);
+  for (let i = 0; i < playerHand.length; i += 1) {
+    key = playerHand[i].rank;
+    if (sortedRank.key === 3 && numOfKeys === 2) score = 10;
+  }
+
+  // Flush - 5 * bet
+  if (sameSuit === true) score = 5;
+
+  // Straight - 4 * bet
+  if (seq === true) score = 4;
+
+  // Three of a kind - 3 * bet
+  for (let i = 0; i < playerHand.length; i += 1) {
+    key = playerHand[i].rank;
+    if (sortedRank.key === 3) score = 3;
+  }
+
+  // Two Pair - 2 * bet
+  for (let i = 0; i < playerHand.length; i += 1) {
+    key = playerHand[i].rank;
+    if (sortedRank.key === 2 && numOfKeys === 3) score = 2;
+  }
+
+  // Jack or Better - 1 * bet
+  for (let i = 0; i < playerHand.length; i += 1) {
+    key = playerHand[i].rank;
+    if (sortedRank.key === 2 && numOfKeys === 4) score = 1;
+  }
 
   return score;
 };
@@ -166,9 +193,12 @@ const handleDeal = (hand) => {
     cardImgs[i].src = `${hand[i].img}`;
   }
 
-  //calculate the point based on current hand
-  let point = calcHandScore(hand);
-  return point;
+  //calculate the score based on current hand
+  let score = calcHandScore(hand);
+  console.log(score);
+  let points = score * bet;
+  coins += points;
+  return coins;
 };
 
 // Deal btn event listener
@@ -180,5 +210,7 @@ dealBtn.addEventListener("click", () => {
     }
     playerHand.push(newDeck.pop());
   }
-  handleDeal(playerHand);
+  let currentPoint = handleDeal(playerHand) - bet;
+
+  console.log(currentPoint);
 });
