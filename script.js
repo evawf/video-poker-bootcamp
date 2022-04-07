@@ -107,17 +107,28 @@ for (let i = 0; i < 5; i += 1) {
   handDiv.appendChild(cardImg);
 }
 
+const isJackOrBetter = (hand, rankObj) => {
+  if (numOfKeys !== 4) return false;
+  for (let i = 0; i < hand.length; i += 1) {
+    let key = hand[i].rank;
+    if (rankObj[key] === 2 && (key >= 11 || key == 1)) {
+      return true;
+    }
+  }
+  return false;
+};
+
 // Check player hand point
 const calcHandScore = (playerHand) => {
   // sort ranks
   let score = 0;
-  let sortedRank = {};
+  let sortedRankObj = {};
   for (let idx = 0; idx < playerHand.length; idx += 1) {
     let rank = playerHand[idx].rank;
-    if (rank in sortedRank) {
-      sortedRank[rank] += 1;
+    if (rank in sortedRankObj) {
+      sortedRankObj[rank] += 1;
     } else {
-      sortedRank[rank] = 1;
+      sortedRankObj[rank] = 1;
     }
   }
 
@@ -125,64 +136,44 @@ const calcHandScore = (playerHand) => {
   let seq = isSequential(playerHand);
   // check if same suit
   let sameSuit = isSameSuit(playerHand);
+  let numOfKeys = Object.keys(sortedRankObj).length;
+  let key;
 
-  console.log(sortedRank);
+  console.log(sortedRankObj);
   // console.log(sameSuit);
   // console.log(seq);
   // console.log(playerHand);
 
   // Winning conditions:
+
   // Royal Flush - 250 * bet
-  if (
-    seq === true &&
-    sameSuit === true &&
-    playerHand[playerHand.length - 1].rank === 13
-  ) {
-    score = 250;
-  }
+  if (isRoyalFlush(playerHand, sortedRankObj)) return 250;
 
   // Straight Flush - 50 * bet
-  if (seq === true && sameSuit === true) score = 50;
+  if (isStraightFlush(playerHand, sortedRankObj)) return 50;
 
   // Four of a kind - 25 * bet
-  let key;
-  for (let i = 0; i < playerHand.length; i += 1) {
-    if (sortedRank.key === 4) score = 25;
-  }
+  if (isFour_of_a_kind(playerHand, sortedRankObj)) return 25;
 
   // Full House - 10 * bet
-  let numOfKeys = Object.keys(sortedRank).length;
-  console.log(numOfKeys);
-  for (let i = 0; i < playerHand.length; i += 1) {
-    key = playerHand[i].rank;
-    if (sortedRank.key === 3 && numOfKeys === 2) score = 10;
-  }
+  if (isFullHouse(playerHand, sortedRankObj)) return 10;
 
   // Flush - 5 * bet
-  if (sameSuit === true) score = 5;
+  if (isFlush(playerHand, sortedRankObj)) return 5;
 
   // Straight - 4 * bet
-  if (seq === true) score = 4;
+  if (isStraight(playerHand, sortedRankObj)) return 4;
 
   // Three of a kind - 3 * bet
-  for (let i = 0; i < playerHand.length; i += 1) {
-    key = playerHand[i].rank;
-    if (sortedRank.key === 3) score = 3;
-  }
+  if (isThree_of_a_kind(playerHand, sortedRankObj)) return 3;
 
   // Two Pair - 2 * bet
-  for (let i = 0; i < playerHand.length; i += 1) {
-    key = playerHand[i].rank;
-    if (sortedRank.key === 2 && numOfKeys === 3) score = 2;
-  }
+  if (isTwoPair(playerHand, sortedRankObj)) return 2;
 
   // Jack or Better - 1 * bet
-  for (let i = 0; i < playerHand.length; i += 1) {
-    key = playerHand[i].rank;
-    if (sortedRank.key === 2 && numOfKeys === 4) score = 1;
-  }
+  if (isJackOrBetter(playerHand, sortedRankObj)) return 1;
 
-  return score;
+  return 0;
 };
 
 // Handle Deal function
@@ -197,12 +188,12 @@ const handleDeal = (hand) => {
   let score = calcHandScore(hand);
   console.log(score);
   let points = score * bet;
-  coins += points;
-  return coins;
+  return points;
 };
 
 // Deal btn event listener
 dealBtn.addEventListener("click", () => {
+  coins -= 1;
   playerHand = [];
   for (let i = 0; i < 5; i += 1) {
     if (newDeck.length === 0) {
@@ -210,7 +201,7 @@ dealBtn.addEventListener("click", () => {
     }
     playerHand.push(newDeck.pop());
   }
-  let currentPoint = handleDeal(playerHand) - bet;
-
-  console.log(currentPoint);
+  let roundPoint = handleDeal(playerHand);
+  console.log(roundPoint);
+  console.log(coins);
 });
