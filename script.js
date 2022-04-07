@@ -7,8 +7,6 @@ const scoreBoardDiv = document.createElement("div");
 scoreBoardDiv.className = "scoreBoardDiv";
 scoreBoardDiv.innerText = "Score Board";
 
-// winning conditions in scoreBoard - do later
-
 const handDiv = document.createElement("div");
 handDiv.className = "handDiv";
 
@@ -28,11 +26,11 @@ const btn4 = document.createElement("button");
 btn4.className = "betBtn";
 const btn5 = document.createElement("button");
 btn5.className = "betBtn";
-btn1.innerText = "10";
-btn2.innerText = "20";
-btn3.innerText = "30";
-btn4.innerText = "40";
-btn5.innerText = "50";
+btn1.innerText = "1";
+btn2.innerText = "2";
+btn3.innerText = "3";
+btn4.innerText = "4";
+btn5.innerText = "5";
 
 const dealBtn = document.createElement("button");
 dealBtn.className = "dealBtn";
@@ -86,48 +84,43 @@ const makeDeck = () => {
       deck.push(card);
     }
   }
-  console.log(deck);
   return deck;
 };
 
-const newDeck = shuffleCards(makeDeck());
+let newDeck = shuffleCards(makeDeck());
 
 /*
 =====================================
 Game logic
 =====================================
 */
-const playerHand = [];
+let playerHand = [];
 let coins = 100;
-let sortedRank = {};
-let sortedSuit = {};
 
-// Deal cards
+// Display cards back
 for (let i = 0; i < 5; i += 1) {
-  if (newDeck.length === 0) {
-    newDeck();
-  }
-  playerHand.push(newDeck.pop());
-  const img = document.createElement("img");
-  img.className = "card";
-  img.src = "imgs/cardback.svg";
-  handDiv.appendChild(img);
+  const cardImg = document.createElement("img");
+  cardImg.id = `cardImg${i}`;
+  cardImg.className = "card";
+  cardImg.src = "imgs/cardback.svg";
+  handDiv.appendChild(cardImg);
 }
 
 // Check player hand point
 const calcHandScore = (playerHand) => {
-  console.log(playerHand);
   // sort ranks
+  let sortedRank = {};
   for (let idx = 0; idx < playerHand.length; idx += 1) {
-    let name = playerHand[idx].name;
-    if (name in sortedRank) {
-      sortedRank[name] += 1;
+    let rank = playerHand[idx].rank;
+    if (rank in sortedRank) {
+      sortedRank[rank] += 1;
     } else {
-      sortedRank[name] = 1;
+      sortedRank[rank] = 1;
     }
   }
 
   // sort suits
+  let sortedSuit = {};
   for (let idx = 0; idx < playerHand.length; idx += 1) {
     let suit = playerHand[idx].suit;
     if (suit in sortedSuit) {
@@ -137,74 +130,55 @@ const calcHandScore = (playerHand) => {
     }
   }
 
-  // let playerHand = [
-  // {
-  //     name: "5",
-  //     suit: "clubs",
-  //     suitsSymbol: "♣︎",
-  //     rank: 5,
-  //     img: "imgs/5_of_clubs.png",
-  //   },
-  //   {
-  //     name: "7",
-  //     suit: "clubs",
-  //     suitsSymbol: "♣︎",
-  //     rank: 7,
-  //     img: "imgs/7_of_clubs.png",
-  // },
-  //   {
-  //     name: "6",
-  //     suit: "hearts",
-  //     suitsSymbol: "♥︎",
-  //     rank: 6,
-  //     img: "imgs/6_of_hearts.png",
-  //   },
-  //   {
-  //     name: "3",
-  //     suit: "diamonds",
-  //     suitsSymbol: "♦︎",
-  //     rank: 3,
-  //     img: "imgs/3_of_diamonds.png",
-  //   },
-  //   {
-  //     name: "4",
-  //     suit: "hearts",
-  //     suitsSymbol: "♥︎",
-  //     rank: 4,
-  //     img: "imgs/4_of_hearts.png",
-  //   },
-  //   {
-  //     name: "jack",
-  //     suit: "hearts",
-  //     suitsSymbol: "♥︎",
-  //     rank: 11,
-  //     img: "imgs/jack_of_hearts.png",
-  //   },
-  //   {
-  //     name: "7",
-  //     suit: "clubs",
-  //     suitsSymbol: "♣︎",
-  //     rank: 7,
-  //     img: "imgs/7_of_clubs.png",
-  //   },
-  // ];
-
+  let seq = isSequential(playerHand);
   // check if hand is sequential
-  let isSequential = false;
-  playerHand.sort((a, b) => (a.rank > b.rank ? 1 : -1));
-  console.log(playerHand);
-  playerHand[0].rank + 4 === playerHand[4].rank
-    ? (isSequential = true)
-    : (isSequential = false);
+  // const isSequential = (playerHand) => {
+  //   playerHand.sort((a, b) => (a.rank > b.rank ? 1 : -1));
+  //   let isSeq = true;
+  //   for (let i = 1; i < playerHand.length - 1; i += 1) {
+  //     if (playerHand[i + 1].rank - playerHand[i].rank !== 1) {
+  //       isSeq = false;
+  //       break;
+  //     }
+  //   }
+  //   return isSeq;
+  // };
 
-  console.log(isSequential);
+  console.log(sortedRank);
+  console.log(sortedSuit);
+  console.log(seq);
 
-  // console.log(sortedRank);
-  // console.log(sortedSuit);
+  // Winning conditions:
+  for (let i = 1; i <= 13; i += 1) {}
 
+  // Royal Flush
+  // if(sortedRank.length ===1 && )
   let score = 0;
 
   return score;
 };
 
-calcHandScore(playerHand);
+// Handle Deal function
+const handleDeal = (hand) => {
+  //Display 5 cards' images
+  const cardImgs = document.querySelectorAll(".card");
+  for (let i = 0; i < cardImgs.length; i += 1) {
+    cardImgs[i].src = `${hand[i].img}`;
+  }
+
+  //calculate the point based on current hand
+  let point = calcHandScore(hand);
+  return point;
+};
+
+// Deal btn event listener
+dealBtn.addEventListener("click", () => {
+  playerHand = [];
+  for (let i = 0; i < 5; i += 1) {
+    if (newDeck.length === 0) {
+      newDeck = shuffleCards(makeDeck());
+    }
+    playerHand.push(newDeck.pop());
+  }
+  handleDeal(playerHand);
+});
