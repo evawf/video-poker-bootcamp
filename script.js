@@ -98,13 +98,23 @@ let playerHand = [];
 let coins = 100;
 let bet = 1;
 
-// Display cards back
-for (let i = 0; i < 5; i += 1) {
-  const cardImg = document.createElement("img");
-  cardImg.id = `cardImg${i}`;
-  cardImg.className = "card";
-  cardImg.src = "imgs/cardback.svg";
-  handDiv.appendChild(cardImg);
+const initGame = () => {
+  // Display cards back
+  for (let i = 0; i < 5; i += 1) {
+    const cardImg = document.createElement("img");
+    cardImg.id = `cardImg${i}`;
+    cardImg.className = "card";
+    cardImg.src = "imgs/cardback.svg";
+    handDiv.appendChild(cardImg);
+  }
+};
+
+let seq;
+let sameSuit;
+let numOfKeys;
+
+const isRoyalFlush = (hand, rankObj){
+  
 }
 
 const isJackOrBetter = (hand, rankObj) => {
@@ -120,8 +130,6 @@ const isJackOrBetter = (hand, rankObj) => {
 
 // Check player hand point
 const calcHandScore = (playerHand) => {
-  // sort ranks
-  let score = 0;
   let sortedRankObj = {};
   for (let idx = 0; idx < playerHand.length; idx += 1) {
     let rank = playerHand[idx].rank;
@@ -133,18 +141,9 @@ const calcHandScore = (playerHand) => {
   }
 
   // check if hand is sequential
-  let seq = isSequential(playerHand);
-  // check if same suit
-  let sameSuit = isSameSuit(playerHand);
-  let numOfKeys = Object.keys(sortedRankObj).length;
-  let key;
-
-  console.log(sortedRankObj);
-  // console.log(sameSuit);
-  // console.log(seq);
-  // console.log(playerHand);
-
-  // Winning conditions:
+  seq = isSequential(playerHand);
+  sameSuit = isSameSuit(playerHand);
+  numOfKeys = Object.keys(sortedRankObj).length;
 
   // Royal Flush - 250 * bet
   if (isRoyalFlush(playerHand, sortedRankObj)) return 250;
@@ -205,3 +204,5 @@ dealBtn.addEventListener("click", () => {
   console.log(roundPoint);
   console.log(coins);
 });
+
+initGame();
