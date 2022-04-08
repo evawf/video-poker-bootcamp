@@ -104,27 +104,90 @@ const initGame = () => {
     const cardImg = document.createElement("img");
     cardImg.id = `cardImg${i}`;
     cardImg.className = "card";
-    cardImg.src = "imgs/cardback.svg";
+    // cardImg.src = "imgs/cardback.svg";
+    cardImg.src = "imgs/Bull-Dog-Squeezers-Red.png";
     handDiv.appendChild(cardImg);
   }
 };
 
-let seq;
-let sameSuit;
-let numOfKeys;
+// Check if royal flush
+const isRoyalFlush = (RankObj) => {
+  let keys = Object.keys(RankObj);
+  if (
+    RankObj[1] === 1 &&
+    RankObj[10] === 1 &&
+    RankObj[11] === 1 &&
+    RankObj[12] &&
+    RankObj[13] & sameSuit
+  )
+    return true;
+  return false;
+};
 
-const isRoyalFlush = (hand, rankObj){
-  
-}
-
-const isJackOrBetter = (hand, rankObj) => {
-  if (numOfKeys !== 4) return false;
-  for (let i = 0; i < hand.length; i += 1) {
-    let key = hand[i].rank;
-    if (rankObj[key] === 2 && (key >= 11 || key == 1)) {
-      return true;
-    }
+// Check if four of a kind
+const isFour_of_a_kind = (RankObj) => {
+  let keys = Object.keys(RankObj);
+  // let numOfQuadruplets = 0;
+  for (let i = 0; i < keys.length; i += 1) {
+    if (RankObj[keys[i]] === 4) return true;
   }
+  return false;
+};
+
+// Check if full house
+const isFullHouse = (RankObj) => {
+  let keys = Object.keys(RankObj);
+  let numOfPair = 0;
+  let numOfTriplets = 0;
+  for (let i = 0; i < keys.length; i += 1) {
+    if (RankObj[keys[i]] === 2) numOfPair += 1;
+    if (RankObj[keys[i]] === 3) numOfTriplets += 1;
+  }
+  if (numOfPair === 1 && numOfTriplets === 1) return true;
+  return false;
+};
+
+// Check if three of a kind
+const isThree_of_a_kind = (RankObj) => {
+  let numOfTriplets = 0;
+  let keys = Object.keys(RankObj);
+  for (let i = 0; i < keys.length; i += 1) {
+    if (RankObj[keys[i]] === 3) return true;
+    // numOfTriplets += 1;
+  }
+  // if (numOfTriplets === 1) return true;
+  return false;
+};
+
+// Check if two pair
+const isTwoPair = (RankObj) => {
+  let numOfPair = 0;
+  let keys = Object.keys(RankObj);
+  for (let i = 0; i < keys.length; i += 1) {
+    if (RankObj[keys[i]] === 2) numOfPair += 1;
+  }
+  if (numOfPair === 2) return true;
+  return false;
+};
+
+// S1 - check if Jack or Better
+// const isJackOrBetter = (hand, rankObj) => {
+//   if (numOfKeys !== 4) return false;
+//   for (let i = 0; i < hand.length; i += 1) {
+//     let key = hand[i].rank;
+//     if (rankObj[key] === 2 && (key >= 11 || key == 1)) {
+//       return true;
+//     }
+//   }
+//   return false;
+// };
+
+// S2 - Jack or Better
+const isJackOrBetter = (rankObj) => {
+  if (rankObj[1] === 2) return true;
+  if (rankObj[11] === 2) return true;
+  if (rankObj[12] === 2) return true;
+  if (rankObj[13] === 2) return true;
   return false;
 };
 
@@ -141,27 +204,27 @@ const calcHandScore = (playerHand) => {
   }
 
   // check if hand is sequential
-  seq = isSequential(playerHand);
-  sameSuit = isSameSuit(playerHand);
-  numOfKeys = Object.keys(sortedRankObj).length;
+  let seq = isSequential(playerHand);
+  let sameSuit = isSameSuit(playerHand);
+  let numOfKeys = Object.keys(sortedRankObj).length;
 
   // Royal Flush - 250 * bet
-  if (isRoyalFlush(playerHand, sortedRankObj)) return 250;
+  // if (isRoyalFlush(playerHand, sortedRankObj)) return 250;
 
   // Straight Flush - 50 * bet
-  if (isStraightFlush(playerHand, sortedRankObj)) return 50;
+  if (sameSuit && seq) return 50;
 
   // Four of a kind - 25 * bet
-  if (isFour_of_a_kind(playerHand, sortedRankObj)) return 25;
+  if (isFour_of_a_kind(sortedRankObj)) return 25;
 
   // Full House - 10 * bet
-  if (isFullHouse(playerHand, sortedRankObj)) return 10;
+  if (isFullHouse(sortedRankObj)) return 10;
 
   // Flush - 5 * bet
-  if (isFlush(playerHand, sortedRankObj)) return 5;
+  if (sameSuit) return 5;
 
   // Straight - 4 * bet
-  if (isStraight(playerHand, sortedRankObj)) return 4;
+  if (seq) return 4;
 
   // Three of a kind - 3 * bet
   if (isThree_of_a_kind(playerHand, sortedRankObj)) return 3;
@@ -170,7 +233,7 @@ const calcHandScore = (playerHand) => {
   if (isTwoPair(playerHand, sortedRankObj)) return 2;
 
   // Jack or Better - 1 * bet
-  if (isJackOrBetter(playerHand, sortedRankObj)) return 1;
+  if (isJackOrBetter(sortedRankObj)) return 1;
 
   return 0;
 };
