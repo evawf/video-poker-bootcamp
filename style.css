@@ -22,6 +22,12 @@ img {
     background-color: pink;
   }
 
+  .handDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
   .btnsDiv {
     display: flex;
     flex-direction: row;
@@ -41,8 +47,15 @@ img {
     width: 80px;
     height: 40px;
     border-radius: 10px;
-    background-color: green;
     color: white;
+  }
+
+  .deActiveBtn {
+    background-color: gray;
+  }
+
+  .activeBtn {
+    background-color: green;
   }
 
   .dealBtn:hover {

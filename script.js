@@ -36,6 +36,8 @@ const dealBtn = document.createElement("button");
 dealBtn.className = "dealBtn";
 dealBtn.id = "dealBtn";
 dealBtn.innerText = "Deal";
+dealBtn.disabled = true;
+dealBtn.classList.add("deActiveBtn");
 
 const mainContainer = document.querySelector(".container");
 
@@ -94,19 +96,22 @@ let newDeck = shuffleCards(makeDeck());
 Game logic
 =====================================
 */
-let playerHand = [];
+let playerHand;
 let coins = 100;
-let bet = 1;
+let bet = 0;
 
 const initGame = () => {
   // Display cards back
   for (let i = 0; i < 5; i += 1) {
+    const cardDiv = document.createElement("div");
+    cardDiv.className = "cardDiv";
     const cardImg = document.createElement("img");
     cardImg.id = `cardImg${i}`;
     cardImg.className = "card";
     // cardImg.src = "imgs/cardback.svg";
     cardImg.src = "imgs/Bull-Dog-Squeezers-Red.png";
-    handDiv.appendChild(cardImg);
+    cardDiv.appendChild(cardImg);
+    handDiv.appendChild(cardDiv);
   }
 };
 
@@ -145,6 +150,47 @@ const isFullHouse = (RankObj) => {
   }
   if (numOfPair === 1 && numOfTriplets === 1) return true;
   return false;
+};
+
+// Check if flush - same suit
+const isSameSuit = (playerHand) => {
+  let sameSuit = true;
+  let temp = playerHand[0].suit;
+  for (let idx = 1; idx < playerHand.length; idx += 1) {
+    if (playerHand[idx].suit !== temp) {
+      sameSuit = false;
+      break;
+    }
+  }
+  return sameSuit;
+};
+
+// Check if straight - sequential
+const isSequential = (playerHand) => {
+  playerHand.sort((a, b) => (a.rank > b.rank ? 1 : -1));
+  let seq = true;
+  let temp = playerHand[0].rank;
+  for (let i = 1; i < playerHand.length; i += 1) {
+    if (playerHand[i].rank - temp !== 1) {
+      seq = false;
+      break;
+    } else {
+      temp = playerHand[i].rank;
+    }
+  }
+
+  let rankArr = [];
+  for (let i = 1; i < playerHand.length; i += 1) {
+    rankArr.push(playerHand[i].rank);
+  }
+  if (
+    playerHand[0].rank === 1 &&
+    Math.max(...rankArr) === 13 &&
+    Math.min(...rankArr) === 10
+  )
+    seq = true;
+
+  return seq;
 };
 
 // Check if three of a kind
@@ -206,7 +252,7 @@ const calcHandScore = (playerHand) => {
   // check if hand is sequential
   let seq = isSequential(playerHand);
   let sameSuit = isSameSuit(playerHand);
-  let numOfKeys = Object.keys(sortedRankObj).length;
+  // let numOfKeys = Object.keys(sortedRankObj).length;
 
   // Royal Flush - 250 * bet
   if (isRoyalFlush(sortedRankObj)) return 250;
@@ -238,24 +284,50 @@ const calcHandScore = (playerHand) => {
   return 0;
 };
 
+const drawNewHand = (playerHand) => {};
+
 // Handle Deal function
 const handleDeal = (hand) => {
+  // console.log(hand);
   //Display 5 cards' images
+
   const cardImgs = document.querySelectorAll(".card");
   for (let i = 0; i < cardImgs.length; i += 1) {
     cardImgs[i].src = `${hand[i].img}`;
   }
 
+  const cardDivs = document.querySelectorAll(".cardDiv");
+  for (let i = 0; i < hand.length; i += 1) {
+    cardImgs[i].addEventListener("click", () => {
+      const textDiv = document.createElement("div");
+      textDiv.innerText = "HOLD";
+      cardDivs[i].appendChild(textDiv);
+    });
+  }
+
   //calculate the score based on current hand
   let score = calcHandScore(hand);
   // console.log(score);
+  console.log(bet);
   let points = score * bet;
   return points;
 };
 
+// Select the bet - bet button event listener
+const betBtns = document.querySelectorAll(".betBtn");
+for (let i = 0; i < betBtns.length; i += 1) {
+  betBtns[i].addEventListener("click", () => {
+    betBtns[i].classList.add("activeBtn");
+    bet = betBtns[i].innerText;
+    dealBtn.disabled = false;
+    dealBtn.classList.remove("deActiveBtn");
+    dealBtn.classList.add("activeBtn");
+  });
+}
+
 // Deal btn event listener
 dealBtn.addEventListener("click", () => {
-  coins -= 1;
+  coins -= bet;
   playerHand = [];
   for (let i = 0; i < 5; i += 1) {
     if (newDeck.length === 0) {
@@ -263,10 +335,14 @@ dealBtn.addEventListener("click", () => {
     }
     playerHand.push(newDeck.pop());
   }
+  console.log(playerHand);
   let roundPoint = handleDeal(playerHand);
   console.log(roundPoint);
   coins += roundPoint;
   console.log(coins);
 });
 
+// Select the cards to hold then draw new cards to replace the rest
+
+// debugger;
 initGame();
