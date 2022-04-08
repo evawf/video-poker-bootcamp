@@ -209,7 +209,7 @@ const calcHandScore = (playerHand) => {
   let numOfKeys = Object.keys(sortedRankObj).length;
 
   // Royal Flush - 250 * bet
-  // if (isRoyalFlush(playerHand, sortedRankObj)) return 250;
+  if (isRoyalFlush(sortedRankObj)) return 250;
 
   // Straight Flush - 50 * bet
   if (sameSuit && seq) return 50;
@@ -227,10 +227,10 @@ const calcHandScore = (playerHand) => {
   if (seq) return 4;
 
   // Three of a kind - 3 * bet
-  if (isThree_of_a_kind(playerHand, sortedRankObj)) return 3;
+  if (isThree_of_a_kind(sortedRankObj)) return 3;
 
   // Two Pair - 2 * bet
-  if (isTwoPair(playerHand, sortedRankObj)) return 2;
+  if (isTwoPair(sortedRankObj)) return 2;
 
   // Jack or Better - 1 * bet
   if (isJackOrBetter(sortedRankObj)) return 1;
@@ -248,7 +248,7 @@ const handleDeal = (hand) => {
 
   //calculate the score based on current hand
   let score = calcHandScore(hand);
-  console.log(score);
+  // console.log(score);
   let points = score * bet;
   return points;
 };
@@ -265,6 +265,7 @@ dealBtn.addEventListener("click", () => {
   }
   let roundPoint = handleDeal(playerHand);
   console.log(roundPoint);
+  coins += roundPoint;
   console.log(coins);
 });
 
