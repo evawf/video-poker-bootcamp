@@ -36,8 +36,8 @@ const dealBtn = document.createElement("button");
 dealBtn.className = "dealBtn";
 dealBtn.id = "dealBtn";
 dealBtn.innerText = "Deal";
-dealBtn.disabled = true;
-dealBtn.classList.add("deActiveBtn");
+// dealBtn.disabled = true;
+// dealBtn.classList.add("deActiveBtn");
 
 const mainContainer = document.querySelector(".container");
 
@@ -99,7 +99,7 @@ Game logic
 let playerHand;
 let score = 0;
 let coins = 100;
-let bet = 0;
+let bet = 1;
 let mode = "deal";
 
 const initGame = () => {
@@ -143,13 +143,18 @@ const displayHandAndHandleHold = (hand) => {
 
 // Select the bet - bet button event listener
 const betBtns = document.querySelectorAll(".betBtn");
-for (let i = 0; i < betBtns.length; i += 1) {
+betBtns[0].classList.add("activeBtn");
+for (let i = 1; i < betBtns.length; i += 1) {
   betBtns[i].addEventListener("click", () => {
+    betBtns[0].classList.remove("activeBtn");
     betBtns[i].classList.add("activeBtn");
     bet = betBtns[i].innerText;
-    dealBtn.disabled = false;
-    dealBtn.classList.remove("deActiveBtn");
-    dealBtn.classList.add("activeBtn");
+    // dealBtn.disabled = false;
+    // dealBtn.classList.remove("deActiveBtn");
+    // dealBtn.classList.add("activeBtn");
+    for (let i = 0; i < betBtns.length; i += 1) {
+      betBtns[i].disabled = true;
+    }
   });
 }
 
@@ -167,6 +172,11 @@ dealBtn.addEventListener("click", () => {
     }
     displayHandAndHandleHold(playerHand);
     pointDiv.innerText = coins;
+    // Disable Bet buttons
+    const betBtns = document.querySelectorAll(".betBtn");
+    for (let i = 0; i < betBtns.length; i += 1) {
+      betBtns[i].disabled = true;
+    }
   } else if (mode === "draw") {
     playerHand = playerHand.map((card) =>
       card["hold"] === true ? card : newDeck.pop()
@@ -179,17 +189,23 @@ dealBtn.addEventListener("click", () => {
       holdTextDiv[i].innerText = "";
     }
 
+    console.log(coins);
     score = calcHandScore(playerHand);
     console.log(score);
+    console.log(bet);
     coins += score * bet;
     pointDiv.innerText = coins;
 
     mode = "deal";
     dealBtn.innerText = "Deal";
+    // Enable Bet Buttons
+    const betBtns = document.querySelectorAll(".betBtn");
+    betBtns[0].classList.add("activeBtn");
+    for (let i = 1; i < betBtns.length; i += 1) {
+      betBtns[i].disabled = false;
+      betBtns[i].classList.remove("activeBtn");
+    }
   }
-
-  //calculate the score based on current hand
-
   return;
 });
 
