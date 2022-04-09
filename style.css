@@ -8,6 +8,13 @@ body {
   width: 100vw;
   height: auto;
   text-align: center;
+  background: url("imgs/tableBackground.png");
+  background-size: cover;
+  color: white;
+}
+
+h2 {
+  color: red;
 }
 
 img {
@@ -19,13 +26,26 @@ img {
   body {
     height: 100%;
     width: 100%;
-    background-color: pink;
+  }
+
+  h2 {
+    margin-top: 45px;
+  }
+
+  .msgBoardDiv {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }
 
   .handDiv {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin: 10px 0;
+    height: 130px;
   }
 
   .pointDiv {
@@ -53,6 +73,41 @@ img {
     height: 40px;
     border-radius: 50%;
     margin: 0 10px;
+    background-size: cover;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #betBtn0 {
+    background: url(imgs/chip0.png);
+    background-size: contain;
+    color: black;
+  }
+
+  #betBtn1 {
+    background: url(imgs/chip1.png);
+    background-size: contain;
+    color: red;
+  }
+
+  #betBtn2 {
+    background: url(imgs/chip2.png);
+    background-size: contain;
+    color: blue;
+  }
+
+  #betBtn3 {
+    background: url(imgs/chip3.png);
+    background-size: contain;
+    color: green;
+  }
+
+  #betBtn4 {
+    background: url(imgs/chip4.png);
+    background-size: contain;
+    color: gold;
   }
 
   .dealBtn {
@@ -69,6 +124,7 @@ img {
 
   .activeBtn {
     background-color: green;
+    border: 3px solid green;
   }
 
   .card {
