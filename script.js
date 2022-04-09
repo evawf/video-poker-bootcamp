@@ -121,22 +121,46 @@ const initGame = () => {
   pointDiv.innerText = coins;
 };
 
+const toggleHold = (hand, i) => {
+  console.log(hand);
+  const holdTextDiv = document.querySelectorAll(".holdTextDiv");
+  if (hand[i]["hold"] === true) {
+    console.log("unHold");
+    holdTextDiv[i].innerText = "";
+    hand[i]["hold"] = false;
+  } else {
+    holdTextDiv[i].innerText = "HOLD";
+    hand[i]["hold"] = true;
+  }
+};
+
+const holdCard = (hand) => {
+  // const holdTextDiv = document.querySelectorAll(".holdTextDiv");
+  const cardImgs = document.querySelectorAll(".card");
+  for (let i = 0; i < hand.length; i += 1) {
+    cardImgs[i].addEventListener("click", toggleHold.bind(null, hand, i));
+    // });
+    // () => {
+    // if (hand[i]["hold"] === true) {
+    //   console.log("unHold");
+    //   holdTextDiv[i].innerText = "";
+    //   hand[i]["hold"] = false;
+    // } else {
+    //   holdTextDiv[i].innerText = "HOLD";
+    //   hand[i]["hold"] = true;
+    // }
+    // });
+  }
+};
+
 // Handle Deal function
-const displayHandAndHandleHold = (hand) => {
+const displayHand = (hand) => {
   //Display 5 cards' images
   const cardImgs = document.querySelectorAll(".card");
-  const holdTextDiv = document.querySelectorAll(".holdTextDiv");
   for (let i = 0; i < cardImgs.length; i += 1) {
     cardImgs[i].src = `${hand[i].img}`;
   }
-
-  for (let i = 0; i < hand.length; i += 1) {
-    cardImgs[i].addEventListener("click", () => {
-      holdTextDiv[i].innerText = "HOLD";
-      hand[i]["hold"] = true;
-      console.log(hand[i]);
-    });
-  }
+  holdCard(hand);
   mode = "draw";
   dealBtn.innerText = "Draw";
 };
@@ -170,13 +194,15 @@ dealBtn.addEventListener("click", () => {
       }
       playerHand.push(newDeck.pop());
     }
-    displayHandAndHandleHold(playerHand);
+    displayHand(playerHand);
     pointDiv.innerText = coins;
     // Disable Bet buttons
     const betBtns = document.querySelectorAll(".betBtn");
     for (let i = 0; i < betBtns.length; i += 1) {
       betBtns[i].disabled = true;
     }
+
+    // Disable hold event listener
   } else if (mode === "draw") {
     playerHand = playerHand.map((card) =>
       card["hold"] === true ? card : newDeck.pop()
