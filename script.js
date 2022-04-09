@@ -97,8 +97,10 @@ Game logic
 =====================================
 */
 let playerHand;
+let score = 0;
 let coins = 100;
 let bet = 0;
+let mode = "deal";
 
 const initGame = () => {
   // Display cards back
@@ -110,35 +112,33 @@ const initGame = () => {
     cardImg.className = "card";
     // cardImg.src = "imgs/cardback.svg";
     cardImg.src = "imgs/Bull-Dog-Squeezers-Red.png";
+    const holdTextDiv = document.createElement("div");
+    holdTextDiv.className = "holdTextDiv";
     cardDiv.appendChild(cardImg);
+    cardDiv.appendChild(holdTextDiv);
     handDiv.appendChild(cardDiv);
   }
   pointDiv.innerText = coins;
 };
 
 // Handle Deal function
-const handleDeal = (hand) => {
-  // console.log(hand);
+const displayHandAndHandleHold = (hand) => {
   //Display 5 cards' images
-
   const cardImgs = document.querySelectorAll(".card");
+  const holdTextDiv = document.querySelectorAll(".holdTextDiv");
   for (let i = 0; i < cardImgs.length; i += 1) {
     cardImgs[i].src = `${hand[i].img}`;
   }
 
-  const cardDivs = document.querySelectorAll(".cardDiv");
   for (let i = 0; i < hand.length; i += 1) {
     cardImgs[i].addEventListener("click", () => {
-      const textDiv = document.createElement("div");
-      textDiv.innerText = "HOLD";
-      cardDivs[i].appendChild(textDiv);
+      holdTextDiv[i].innerText = "HOLD";
+      hand[i]["hold"] = true;
+      console.log(hand[i]);
     });
   }
-
-  //calculate the score based on current hand
-  let score = calcHandScore(hand);
-  let points = score * bet;
-  return points;
+  mode = "draw";
+  dealBtn.innerText = "Draw";
 };
 
 // Select the bet - bet button event listener
@@ -155,26 +155,42 @@ for (let i = 0; i < betBtns.length; i += 1) {
 
 // Deal btn event listener
 dealBtn.addEventListener("click", () => {
-  coins -= bet;
-  playerHand = [];
-
-  // Add 5 cards to hand
-  for (let i = 0; i < 5; i += 1) {
-    if (newDeck.length === 0) {
-      newDeck = shuffleCards(makeDeck());
+  if (mode === "deal") {
+    coins -= bet;
+    playerHand = [];
+    // Add 5 cards to hand
+    for (let i = 0; i < 5; i += 1) {
+      if (newDeck.length === 0) {
+        newDeck = shuffleCards(makeDeck());
+      }
+      playerHand.push(newDeck.pop());
     }
-    playerHand.push(newDeck.pop());
-  }
-  console.log(playerHand);
+    displayHandAndHandleHold(playerHand);
+    pointDiv.innerText = coins;
+  } else if (mode === "draw") {
+    playerHand = playerHand.map((card) =>
+      card["hold"] === true ? card : newDeck.pop()
+    );
+    console.log(playerHand);
+    const cardImgs = document.querySelectorAll(".card");
+    const holdTextDiv = document.querySelectorAll(".holdTextDiv");
+    for (let i = 0; i < cardImgs.length; i += 1) {
+      cardImgs[i].src = `${playerHand[i].img}`;
+      holdTextDiv[i].innerText = "";
+    }
 
-  let roundPoint = handleDeal(playerHand);
-  console.log(roundPoint);
-  coins += roundPoint;
-  console.log(coins);
-  pointDiv.innerText = coins;
+    score = calcHandScore(playerHand);
+    console.log(score);
+    coins += score * bet;
+    pointDiv.innerText = coins;
+
+    mode = "deal";
+    dealBtn.innerText = "Deal";
+  }
+
+  //calculate the score based on current hand
+
+  return;
 });
 
-// Select the cards to hold then draw new cards to replace the rest
-
-// debugger;
 initGame();

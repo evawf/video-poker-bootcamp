@@ -121,7 +121,8 @@ const isJackOrBetter = (rankObj) => {
 };
 
 // Check player hand point
-const calcHandScore = (playerCrtHand) => {
+const calcHandScore = (playerHand) => {
+  let playerCrtHand = [...playerHand];
   let sortedRankObj = {};
   for (let idx = 0; idx < playerCrtHand.length; idx += 1) {
     let rank = playerCrtHand[idx].rank;
