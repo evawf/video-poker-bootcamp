@@ -10,7 +10,9 @@ body {
   text-align: center;
   background: url("imgs/tableBackground.png");
   background-size: cover;
+  background-repeat: no-repeat;
   color: white;
+  font-family: "Aclonica", sans-serif;
 }
 
 h2 {
@@ -45,19 +47,27 @@ img {
     flex-direction: row;
     justify-content: center;
     margin: 10px 0;
-    height: 130px;
+    height: 120px;
   }
 
-  .pointDiv {
-    background-color: black;
+  .coinContainer {
     color: red;
-    width: 60px;
-    height: 60px;
+    width: 150px;
+    height: 80px;
     border-radius: 50%;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 60px;
+  }
+
+  .coinImgDiv {
+    width: 50%;
+    height: 100%;
+    background: url(imgs/coins.png);
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 
   .btnsDiv {
@@ -65,12 +75,13 @@ img {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 20px;
+    margin: 10px;
+    padding-right: 120px;
   }
 
   .betBtn {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     margin: 0 10px;
     background-size: cover;
@@ -80,9 +91,21 @@ img {
     align-items: center;
   }
 
+  .betBtnContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px;
+  }
+
+  .betBtn:hover {
+    border: 3px solid gold;
+  }
+
   #betBtn0 {
     background: url(imgs/chip0.png);
-    background-size: contain;
+    background-size: cover;
     color: black;
   }
 
@@ -111,20 +134,24 @@ img {
   }
 
   .dealBtn {
-    width: 80px;
-    height: 40px;
-    border-radius: 10px;
-    background-color: green;
-    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 5px solid darkgoldenrod;
+    background-color: gold;
+    color: black;
+    /* margin-left: 30px; */
+    font-family: "Aclonica", sans-serif;
   }
 
-  .deActiveBtn {
-    background-color: gray;
+  .dealBtn:hover {
+    border: 5px solid silver;
   }
 
   .activeBtn {
-    background-color: green;
-    border: 3px solid green;
+    /* background-color: green; */
+    width: 40px;
+    height: 40px;
   }
 
   .card {

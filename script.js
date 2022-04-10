@@ -16,30 +16,37 @@ msgBoardDiv.innerText = "Tap Deal to play";
 const handDiv = document.createElement("div");
 handDiv.className = "handDiv";
 
+const coinImgDiv = document.createElement("div");
+coinImgDiv.className = "coinImgDiv";
 const pointDiv = document.createElement("div");
 pointDiv.className = "pointDiv";
-// pointDiv.innerText = "Coins: ";
+
+const coinContainer = document.createElement("div");
+coinContainer.className = "coinContainer";
+coinContainer.append(coinImgDiv, pointDiv);
 
 const btnsDiv = document.createElement("div");
+const betBtnContainer = document.createElement("div");
+betBtnContainer.className = "betBtnContainer";
 btnsDiv.className = "btnsDiv";
-btnsDiv.append(pointDiv);
+btnsDiv.append(coinContainer);
 for (let i = 0; i < 5; i += 1) {
-  const btn = document.createElement("div");
+  const btn = document.createElement("button");
   btn.className = "betBtn";
   btn.id = `betBtn${i}`;
   btn.innerText = i + 1;
-  btnsDiv.append(btn);
+  betBtnContainer.append(btn);
 }
+btnsDiv.append(betBtnContainer);
 
 const dealBtn = document.createElement("button");
 dealBtn.className = "dealBtn";
 dealBtn.id = "dealBtn";
 dealBtn.innerText = "Deal";
 
-// const mainContainer = document.querySelector(".container");
-
 btnsDiv.append(dealBtn);
-document.body.append(msgBoardDiv, handDiv, btnsDiv);
+const containerDiv = document.querySelector(".container");
+containerDiv.append(msgBoardDiv, handDiv, btnsDiv);
 
 /*
 =====================================
@@ -115,12 +122,18 @@ const toggleHold = (event) => {
   const index = cardElement.dataset.id;
 
   const holdTextDiv = document.querySelectorAll(".holdTextDiv");
+  const cardDivs = document.querySelectorAll(".cardDiv");
   if (playerHand[index]["hold"] === true) {
     console.log("unHold");
     holdTextDiv[index].innerText = "";
     playerHand[index]["hold"] = false;
   } else {
     holdTextDiv[index].innerText = "HOLD";
+    const holdImg = document.createElement("img");
+    cardDivs[index].append(holdImg);
+    holdImg.src = "imgs/hold.png";
+    // holdTextDiv[index].style = "background:url(imgs/hold.png)";
+    // cardDivs[index].style = "background: url(imgs/hold.png); z-index: 1;";
     playerHand[index]["hold"] = true;
   }
 };
@@ -146,17 +159,44 @@ const displayHand = () => {
   msgBoardDiv.innerText = "Click cards to HOLD";
 };
 
-// Select the bet - bet button event listener
 const betBtns = document.querySelectorAll(".betBtn");
-betBtns[0].classList.add("activeBtn");
-for (let i = 1; i < betBtns.length; i += 1) {
+// let activeBtn = null;
+// betBtns.forEach((btn) => {
+//   btn.addEventListener("click", (e) => {
+//     let clickedBtn = e.currentTarget;
+//     clickedBtn.classList.add("activeBtn");
+//     bet = clickedBtn.innerText;
+//     console.log(bet);
+//     if ((activeBtn = null && activeBtn !== clickedBtn)) {
+//       console.log(activeBtn);
+//       activeBtn.classList.remove("activeBtn");
+//     }
+//     activeBtn = clickedBtn;
+//   });
+// });
+
+const disableAllBetBtns = () => {
+  for (let i = 0; i < betBtns.length; i += 1) {
+    betBtns[i].disabled = true;
+    betBtns[i].style = "background-color: gray";
+  }
+};
+
+const enableAllBetBtns = () => {
+  for (let i = 0; i < betBtns.length; i += 1) {
+    betBtns[i].disabled = false;
+    betBtns[i].style = "filter: blur(0px)";
+    betBtns[i].classList.remove("activeBtn");
+  }
+};
+
+// Select the bet - bet button event listener
+for (let i = 0; i < betBtns.length; i += 1) {
   betBtns[i].addEventListener("click", () => {
-    betBtns[0].classList.remove("activeBtn");
-    betBtns[i].classList.add("activeBtn");
     bet = betBtns[i].innerText;
-    // for (let i = 0; i < betBtns.length; i += 1) {
-    //   betBtns[i].disabled = true;
-    // }
+    console.log(bet);
+    betBtns[i].classList.add("activeBtn");
+    disableAllBetBtns();
   });
 }
 
@@ -174,11 +214,12 @@ dealBtn.addEventListener("click", () => {
     }
     displayHand(playerHand);
     pointDiv.innerText = coins;
-    // Disable Bet buttons
-    const betBtns = document.querySelectorAll(".betBtn");
-    for (let i = 0; i < betBtns.length; i += 1) {
-      betBtns[i].disabled = true;
-    }
+    // // Disable Bet buttons
+    disableAllBetBtns();
+    // const betBtns = document.querySelectorAll(".betBtn");
+    // for (let i = 0; i < betBtns.length; i += 1) {
+    //   betBtns[i].disabled = true;
+    // }
   } else if (mode === "draw") {
     playerHand = playerHand.map((card) =>
       card["hold"] === true ? card : newDeck.pop()
@@ -192,22 +233,21 @@ dealBtn.addEventListener("click", () => {
       cardImgs[i].removeEventListener("click", toggleHold);
     }
 
-    console.log(coins);
     score = calcHandScore(playerHand);
-    console.log(score);
-    console.log(bet);
     coins += score * bet;
     pointDiv.innerText = coins;
     mode = "deal";
     dealBtn.innerText = "Deal";
     msgBoardDiv.innerText = "Click Deal to continue";
-    // Enable Bet Buttons
-    const betBtns = document.querySelectorAll(".betBtn");
-    betBtns[0].classList.add("activeBtn");
-    for (let i = 1; i < betBtns.length; i += 1) {
-      betBtns[i].disabled = false;
-      betBtns[i].classList.remove("activeBtn");
-    }
+
+    // // Enable Bet Buttons
+    enableAllBetBtns();
+    // const betBtns = document.querySelectorAll(".betBtn");
+    // betBtns[0].classList.add("activeBtn");
+    // for (let i = 1; i < betBtns.length; i += 1) {
+    //   betBtns[i].disabled = false;
+    //   betBtns[i].classList.remove("activeBtn");
+    // }
   }
   return;
 });
