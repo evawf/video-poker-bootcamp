@@ -48,6 +48,12 @@ btnsDiv.append(dealBtn);
 const containerDiv = document.querySelector(".container");
 containerDiv.append(msgBoardDiv, handDiv, btnsDiv);
 
+// Animation Div
+const animationDiv = document.createElement("div");
+containerDiv.appendChild(animationDiv);
+animationDiv.className = "animationDiv";
+animationDiv.style = "postion:absolute; ";
+
 /*
 =====================================
 Shuffled Deck
@@ -120,9 +126,8 @@ const initGame = () => {
 const toggleHold = (event) => {
   const cardElement = event.target;
   const index = cardElement.dataset.id;
-
   const holdImg = document.querySelectorAll(".holdImg");
-  const cardDivs = document.querySelectorAll(".cardDiv");
+  // const cardDivs = document.querySelectorAll(".cardDiv");
   if (playerHand[index]["hold"] === true) {
     holdImg[index].src = "";
     playerHand[index]["hold"] = false;
@@ -218,7 +223,6 @@ dealBtn.addEventListener("click", () => {
     playerHand = playerHand.map((card) =>
       card["hold"] === true ? card : newDeck.pop()
     );
-    console.log(playerHand);
     const cardImgs = document.querySelectorAll(".card");
     const holdImg = document.querySelectorAll(".holdImg");
     for (let i = 0; i < cardImgs.length; i += 1) {
@@ -232,9 +236,29 @@ dealBtn.addEventListener("click", () => {
     pointDiv.innerText = coins;
     mode = "deal";
     dealBtn.innerText = "Deal";
-    msgBoardDiv.innerText = "Click Deal to continue";
+    if (score === 0) {
+      msgBoardDiv.innerText = "0 Point";
+    } else if (score === 1) {
+      msgBoardDiv.innerText = `Jack or Better: + ${score * bet} Points`;
+    } else if (score === 2) {
+      msgBoardDiv.innerText = `Two Pair: + ${score * bet} Points`;
+    } else if (score === 3) {
+      msgBoardDiv.innerText = `Three of a Kind: + ${score * bet} Points`;
+    } else if (score === 4) {
+      msgBoardDiv.innerText = `Straight: + ${score * bet} Points`;
+    } else if (score === 5) {
+      msgBoardDiv.innerText = `Flush: + ${score * bet} Points`;
+    } else if (score === 10) {
+      msgBoardDiv.innerText = `Full House: + ${score * bet} Points`;
+    } else if (score === 25) {
+      msgBoardDiv.innerText = `Four of a Kind: + ${score * bet} Points`;
+    } else if (score === 50) {
+      msgBoardDiv.innerText = `Straight Flush: + ${score * bet} Points`;
+    } else if (score === 250) {
+      msgBoardDiv.innerText = `Royal Flush: + ${score * bet} Points`;
+    }
 
-    // // Enable Bet Buttons
+    // Enable Bet Buttons
     enableAllBetBtns();
     // const betBtns = document.querySelectorAll(".betBtn");
     // betBtns[0].classList.add("activeBtn");
@@ -245,5 +269,22 @@ dealBtn.addEventListener("click", () => {
   }
   return;
 });
+
+// Audio Control Function
+const music = document.getElementById("music");
+const musicBtn = document.getElementById("playMusic");
+let isPlaying = false;
+const toggleMusic = () => {
+  if (isPlaying === false) {
+    music.play();
+    musicBtn.innerHTML = `<i class="fa fa-music"></i>`;
+    isPlaying = true;
+  } else {
+    music.pause();
+    musicBtn.innerHTML = `<i class="fa fa-pause"></i>`;
+    isPlaying = false;
+  }
+};
+musicBtn.addEventListener("click", toggleMusic);
 
 initGame();

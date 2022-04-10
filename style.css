@@ -40,6 +40,7 @@ img {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    color: gold;
   }
 
   .handDiv {
@@ -68,6 +69,11 @@ img {
     background: url(imgs/coins.png);
     background-size: contain;
     background-repeat: no-repeat;
+  }
+
+  .pointDiv {
+    color: gold;
+    font-size: larger;
   }
 
   .btnsDiv {
@@ -205,5 +211,9 @@ img {
     to {
       top: 0px;
     }
+  }
+
+  i {
+    color: gold;
   }
 }
