@@ -170,5 +170,7 @@ img {
     height: 100px;
     margin: 0 10px;
     border-radius: 3px;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
   }
 }
