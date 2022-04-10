@@ -108,10 +108,10 @@ const initGame = () => {
     cardImg.id = `cardImg${i}`;
     cardImg.className = "card";
     cardImg.src = "imgs/Bull-Dog-Squeezers-Red.png";
-    const holdTextDiv = document.createElement("div");
-    holdTextDiv.className = "holdTextDiv";
+    const holdImg = document.createElement("img");
+    holdImg.className = "holdImg";
     cardDiv.appendChild(cardImg);
-    cardDiv.appendChild(holdTextDiv);
+    cardDiv.appendChild(holdImg);
     handDiv.appendChild(cardDiv);
   }
   pointDiv.innerText = coins;
@@ -121,19 +121,13 @@ const toggleHold = (event) => {
   const cardElement = event.target;
   const index = cardElement.dataset.id;
 
-  const holdTextDiv = document.querySelectorAll(".holdTextDiv");
+  const holdImg = document.querySelectorAll(".holdImg");
   const cardDivs = document.querySelectorAll(".cardDiv");
   if (playerHand[index]["hold"] === true) {
-    console.log("unHold");
-    holdTextDiv[index].innerText = "";
+    holdImg[index].src = "";
     playerHand[index]["hold"] = false;
   } else {
-    holdTextDiv[index].innerText = "HOLD";
-    const holdImg = document.createElement("img");
-    cardDivs[index].append(holdImg);
-    holdImg.src = "imgs/hold.png";
-    // holdTextDiv[index].style = "background:url(imgs/hold.png)";
-    // cardDivs[index].style = "background: url(imgs/hold.png); z-index: 1;";
+    holdImg[index].src = "imgs/hold.png";
     playerHand[index]["hold"] = true;
   }
 };
@@ -226,10 +220,10 @@ dealBtn.addEventListener("click", () => {
     );
     console.log(playerHand);
     const cardImgs = document.querySelectorAll(".card");
-    const holdTextDiv = document.querySelectorAll(".holdTextDiv");
+    const holdImg = document.querySelectorAll(".holdImg");
     for (let i = 0; i < cardImgs.length; i += 1) {
       cardImgs[i].src = `${playerHand[i].img}`;
-      holdTextDiv[i].innerText = "";
+      holdImg[i].src = "";
       cardImgs[i].removeEventListener("click", toggleHold);
     }
 

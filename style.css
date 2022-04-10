@@ -154,6 +154,17 @@ img {
     height: 40px;
   }
 
+  .cardDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .holdImg {
+    width: 40px;
+    height: auto;
+  }
+
   .card {
     width: auto;
     height: 100px;
