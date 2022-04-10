@@ -191,10 +191,12 @@ const enableAllBetBtns = () => {
 
 // Select the bet - bet button event listener
 for (let i = 0; i < betBtns.length; i += 1) {
+  betBtns[0].classList.add("activeBtn");
   betBtns[i].addEventListener("click", () => {
     bet = betBtns[i].innerText;
     console.log(bet);
     betBtns[i].classList.add("activeBtn");
+    betBtns[0].classList.remove("activeBtn");
     disableAllBetBtns();
   });
 }
@@ -260,6 +262,7 @@ dealBtn.addEventListener("click", () => {
 
     // Enable Bet Buttons
     enableAllBetBtns();
+    betBtns[0].classList.add("activeBtn");
     // const betBtns = document.querySelectorAll(".betBtn");
     // betBtns[0].classList.add("activeBtn");
     // for (let i = 1; i < betBtns.length; i += 1) {
