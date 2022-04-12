@@ -177,7 +177,7 @@ const betBtns = document.querySelectorAll(".betBtn");
 const disableAllBetBtns = () => {
   for (let i = 0; i < betBtns.length; i += 1) {
     betBtns[i].disabled = true;
-    betBtns[i].style = "background-color: gray";
+    // betBtns[i].style = "background-color: gray";
   }
 };
 
@@ -197,13 +197,14 @@ for (let i = 0; i < betBtns.length; i += 1) {
     console.log(bet);
     betBtns[i].classList.add("activeBtn");
     betBtns[0].classList.remove("activeBtn");
-    disableAllBetBtns();
+    // disableAllBetBtns();
   });
 }
 
 // Deal btn event listener
 dealBtn.addEventListener("click", () => {
   if (mode === "deal") {
+    disableAllBetBtns();
     coins -= bet;
     playerHand = [];
     // Add 5 cards to hand

@@ -15,6 +15,7 @@ body {
 
 h2 {
   color: red;
+  margin-top: 40px;
 }
 
 .msgBoardDiv {
@@ -42,7 +43,7 @@ h2 {
   width: auto;
   display: flex;
   flex-direction: column;
-  margin: 0 10px;
+  margin: 0 5px;
 }
 
 .holdImg {
@@ -53,6 +54,108 @@ h2 {
 img {
   width: 20px;
   height: auto;
+}
+
+.coinContainer {
+  height: 50px;
+  color: red;
+  width: auto;
+  /* height: 80px; */
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin-left: 60px; */
+}
+
+.coinImgDiv {
+  width: 70px;
+  height: 60px;
+  background: url(imgs/coins.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.betBtnContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  height: 50px;
+}
+
+.betBtn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 0 10px;
+  background-size: cover;
+  border: 1px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.betBtn:hover {
+  border: 3px solid gold;
+}
+
+#betBtn0 {
+  background: url(imgs/chip0.png);
+  background-size: cover;
+  color: black;
+}
+
+#betBtn1 {
+  background: url(imgs/chip1.png);
+  background-size: contain;
+  color: red;
+}
+
+#betBtn2 {
+  background: url(imgs/chip2.png);
+  background-size: contain;
+  color: blue;
+}
+
+#betBtn3 {
+  background: url(imgs/chip3.png);
+  background-size: contain;
+  color: green;
+}
+
+#betBtn4 {
+  background: url(imgs/chip4.png);
+  background-size: contain;
+  color: gold;
+}
+
+.dealBtn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 5px solid darkgoldenrod;
+  background-color: gold;
+  color: black;
+  /* margin-left: 30px; */
+  font-family: "Aclonica", sans-serif;
+}
+
+.dealBtn:hover {
+  border: 5px solid silver;
+}
+
+.dealBtn:hover {
+  border: 5px solid silver;
+}
+
+.activeBtn {
+  /* background-color: green; */
+  width: 40px;
+  height: 40px;
+  border: 2px solid gold;
 }
 
 @media only screen and (orientation: landscape) {
@@ -79,7 +182,7 @@ img {
   }
 
   .msgBoardDiv {
-    margin-bottom: 30px;
+    margin: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -150,62 +253,6 @@ img {
     margin: 0 20px;
   }
 
-  .betBtn:hover {
-    border: 3px solid gold;
-  }
-
-  #betBtn0 {
-    background: url(imgs/chip0.png);
-    background-size: cover;
-    color: black;
-  }
-
-  #betBtn1 {
-    background: url(imgs/chip1.png);
-    background-size: contain;
-    color: red;
-  }
-
-  #betBtn2 {
-    background: url(imgs/chip2.png);
-    background-size: contain;
-    color: blue;
-  }
-
-  #betBtn3 {
-    background: url(imgs/chip3.png);
-    background-size: contain;
-    color: green;
-  }
-
-  #betBtn4 {
-    background: url(imgs/chip4.png);
-    background-size: contain;
-    color: gold;
-  }
-
-  .dealBtn {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: 5px solid darkgoldenrod;
-    background-color: gold;
-    color: black;
-    /* margin-left: 30px; */
-    font-family: "Aclonica", sans-serif;
-  }
-
-  .dealBtn:hover {
-    border: 5px solid silver;
-  }
-
-  .activeBtn {
-    /* background-color: green; */
-    width: 40px;
-    height: 40px;
-    border: 2px solid gold;
-  }
-
   .cardDiv {
     display: flex;
     flex-direction: column;
@@ -268,9 +315,11 @@ img {
   }
 }
 
-@media screen and (min-width: 768px) {
+@media only screen and (min-width: 768px) {
   body {
     background-color: black;
+    margin: 0;
+    padding: 0;
   }
 
   h2 {
@@ -281,15 +330,15 @@ img {
     height: 100%;
     width: auto;
     background-size: contain;
-    margin-top: 55px;
+    /* margin-top: 55px; */
   }
 
   .msgBoardDiv {
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media only screen and (min-width: 1024px) {
   body {
     margin: 0;
     padding: 0;
