@@ -281,6 +281,7 @@ let isPlaying = false;
 const toggleMusic = () => {
   if (isPlaying === false) {
     music.play();
+    music.loop = true;
     musicBtn.innerHTML = `<i class="fa fa-music"></i>`;
     isPlaying = true;
   } else {

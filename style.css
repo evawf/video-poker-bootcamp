@@ -60,13 +60,11 @@ img {
   height: 50px;
   color: red;
   width: auto;
-  /* height: 80px; */
   border-radius: 50%;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-left: 60px; */
 }
 
 .coinImgDiv {
@@ -139,7 +137,6 @@ img {
   border: 5px solid darkgoldenrod;
   background-color: gold;
   color: black;
-  /* margin-left: 30px; */
   font-family: "Aclonica", sans-serif;
 }
 
@@ -152,7 +149,6 @@ img {
 }
 
 .activeBtn {
-  /* background-color: green; */
   width: 40px;
   height: 40px;
   border: 2px solid gold;
@@ -258,10 +254,7 @@ img {
     flex-direction: column;
     align-items: center;
     position: relative;
-    /* transition: transform 0.8s; */
-    /* transform-style: preserve-3d; */
     animation-timing-function: ease-in;
-    /* animation: movement 2s ease-in; */
   }
 
   .cardDiv:nth-child(1) {
@@ -316,43 +309,31 @@ img {
 }
 
 @media only screen and (min-width: 768px) {
-  body {
-    background-color: black;
-    margin: 0;
-    padding: 0;
-  }
-
-  h2 {
-    margin-bottom: 0;
-  }
-
-  .container {
-    height: 100%;
-    width: auto;
-    background-size: contain;
-    /* margin-top: 55px; */
-  }
-
-  .msgBoardDiv {
-    /* margin-bottom: 20px; */
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  body {
-    margin: 0;
-    padding: 0;
-  }
-
   .container {
     height: 100vh;
     width: auto;
     background-size: contain;
-    margin: 0;
-    padding: 0;
-    /* margin: 25px 0; */
-    /* padding-top: 80px; */
-    background-position: center center;
+  }
+
+  h2 {
+    margin: 30px 0 60px 0;
+  }
+
+  .activeBtn {
+    width: 40px;
+    height: 40px;
+    border: 2px solid gold;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  h2 {
+    margin-bottom: 100px;
+  }
+  .container {
+    height: 100vh;
+    width: auto;
+    background-size: contain;
   }
 
   .msgBoardDiv {
@@ -370,5 +351,11 @@ img {
 
   .holdImg {
     width: 60px;
+  }
+
+  .activeBtn {
+    width: 40px;
+    height: 40px;
+    border: 2px solid gold;
   }
 }
