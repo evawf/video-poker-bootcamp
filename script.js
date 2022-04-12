@@ -159,20 +159,24 @@ const displayHand = () => {
 };
 
 const betBtns = document.querySelectorAll(".betBtn");
-// let activeBtn = null;
-// betBtns.forEach((btn) => {
-//   btn.addEventListener("click", (e) => {
-//     let clickedBtn = e.currentTarget;
-//     clickedBtn.classList.add("activeBtn");
-//     bet = clickedBtn.innerText;
-//     console.log(bet);
-//     if ((activeBtn = null && activeBtn !== clickedBtn)) {
-//       console.log(activeBtn);
-//       activeBtn.classList.remove("activeBtn");
-//     }
-//     activeBtn = clickedBtn;
-//   });
-// });
+betBtns[0].classList.add("activeBtn");
+let activeBtn;
+betBtns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    let clickedBtn = e.currentTarget;
+    clickedBtn.classList.add("activeBtn");
+    bet = clickedBtn.innerText;
+    console.log(bet);
+    console.log(clickedBtn);
+    for (let i = 0; i < betBtns.length; i += 1) {
+      if (betBtns[i] !== clickedBtn) {
+        console.log(activeBtn);
+        betBtns[i].classList.remove("activeBtn");
+      }
+    }
+    activeBtn = clickedBtn;
+  });
+});
 
 const disableAllBetBtns = () => {
   for (let i = 0; i < betBtns.length; i += 1) {
@@ -190,21 +194,20 @@ const enableAllBetBtns = () => {
 };
 
 // Select the bet - bet button event listener
-for (let i = 0; i < betBtns.length; i += 1) {
-  betBtns[0].classList.add("activeBtn");
-  betBtns[i].addEventListener("click", () => {
-    bet = betBtns[i].innerText;
-    console.log(bet);
-    betBtns[i].classList.add("activeBtn");
-    betBtns[0].classList.remove("activeBtn");
-    // disableAllBetBtns();
-  });
-}
+// for (let i = 0; i < betBtns.length; i += 1) {
+//   betBtns[0].classList.add("activeBtn");
+//   betBtns[i].addEventListener("click", () => {
+//     bet = betBtns[i].innerText;
+//     console.log(bet);
+//     betBtns[i].classList.add("activeBtn");
+//     betBtns[0].classList.remove("activeBtn");
+//     // disableAllBetBtns();
+//   });
+// }
 
 // Deal btn event listener
 dealBtn.addEventListener("click", () => {
   if (mode === "deal") {
-    disableAllBetBtns();
     coins -= bet;
     playerHand = [];
     // Add 5 cards to hand
