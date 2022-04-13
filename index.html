@@ -21,12 +21,19 @@
       href="https://fonts.googleapis.com/css2?family=Aclonica&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
     <link rel="shortcut icon" href="imgs/chip4.png" />
 
     <title>Rocket Casino</title>
   </head>
   <body>
-    <div class="container">
+    <div class="mainContainer">
       <h2>
         <img
           class="logo-img"
@@ -38,14 +45,53 @@
           src="https://ra-web-files.s3.ap-southeast-1.amazonaws.com/all/brand/logo.png"
         />
       </h2>
+      <h5 style="color: red">Video Poker: Jack Or Better</h5>
+
       <div id="playMusic">
         <i class="fa fa-music"></i>
       </div>
       <audio id="music">
         <source src="Inspiring-Acoustic-Guitar.mp3" />
       </audio>
+      <div class="container-fluid justify-content-center">
+        <div class="row row-lg-6 justify-content-center">
+          <div class="col col-lg-2 text-start">Royal Flush</div>
+          <div class="col col-lg-1">250</div>
+          <div class="col col-lg-2 text-start">Straight</div>
+          <div class="col col-lg-1">4</div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col col-lg-2 text-start">Straight Flush</div>
+          <div class="col col-lg-1">50</div>
+          <div class="col col-lg-2 text-start">Three of a Kind</div>
+          <div class="col col-lg-1">3</div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col col-lg-2 text-start">Four of a Kind</div>
+          <div class="col col-lg-1">25</div>
+          <div class="col col-lg-2 text-start">Two Pair</div>
+          <div class="col col-lg-1">2</div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col col-lg-2 text-start">Full House</div>
+          <div class="col col-lg-1">10</div>
+          <div class="col col-lg-2 text-start">Jacks or Better</div>
+          <div class="col col-lg-1">1</div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col col-lg-2 text-start">Flush</div>
+          <div class="col col-lg-1">5</div>
+          <div class="col col-lg-2 text-start">No Point</div>
+          <div class="col col-lg-1">0</div>
+        </div>
+      </div>
     </div>
 
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
     <script src="script.js"></script>
     <script src="computeScore.js"></script>
   </body>

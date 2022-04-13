@@ -45,7 +45,7 @@ dealBtn.id = "dealBtn";
 dealBtn.innerText = "Deal";
 
 btnsDiv.append(dealBtn);
-const containerDiv = document.querySelector(".container");
+const containerDiv = document.querySelector(".mainContainer");
 containerDiv.append(msgBoardDiv, handDiv, btnsDiv);
 
 // Animation Div
@@ -159,20 +159,20 @@ const displayHand = () => {
 };
 
 const betBtns = document.querySelectorAll(".betBtn");
-// let activeBtn = null;
-// betBtns.forEach((btn) => {
-//   btn.addEventListener("click", (e) => {
-//     let clickedBtn = e.currentTarget;
-//     clickedBtn.classList.add("activeBtn");
-//     bet = clickedBtn.innerText;
-//     console.log(bet);
-//     if ((activeBtn = null && activeBtn !== clickedBtn)) {
-//       console.log(activeBtn);
-//       activeBtn.classList.remove("activeBtn");
-//     }
-//     activeBtn = clickedBtn;
-//   });
-// });
+betBtns[0].classList.add("activeBtn");
+betBtns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    let clickedBtn = e.currentTarget;
+    clickedBtn.classList.add("activeBtn");
+    bet = clickedBtn.innerText;
+    console.log(bet);
+    for (let i = 0; i < betBtns.length; i += 1) {
+      if (betBtns[i] !== clickedBtn) {
+        betBtns[i].classList.remove("activeBtn");
+      }
+    }
+  });
+});
 
 const disableAllBetBtns = () => {
   for (let i = 0; i < betBtns.length; i += 1) {
@@ -184,22 +184,9 @@ const disableAllBetBtns = () => {
 const enableAllBetBtns = () => {
   for (let i = 0; i < betBtns.length; i += 1) {
     betBtns[i].disabled = false;
-    betBtns[i].style = "filter: blur(0px)";
     betBtns[i].classList.remove("activeBtn");
   }
 };
-
-// Select the bet - bet button event listener
-for (let i = 0; i < betBtns.length; i += 1) {
-  betBtns[0].classList.add("activeBtn");
-  betBtns[i].addEventListener("click", () => {
-    bet = betBtns[i].innerText;
-    console.log(bet);
-    betBtns[i].classList.add("activeBtn");
-    betBtns[0].classList.remove("activeBtn");
-    disableAllBetBtns();
-  });
-}
 
 // Deal btn event listener
 dealBtn.addEventListener("click", () => {
@@ -217,10 +204,6 @@ dealBtn.addEventListener("click", () => {
     pointDiv.innerText = coins;
     // // Disable Bet buttons
     disableAllBetBtns();
-    // const betBtns = document.querySelectorAll(".betBtn");
-    // for (let i = 0; i < betBtns.length; i += 1) {
-    //   betBtns[i].disabled = true;
-    // }
   } else if (mode === "draw") {
     playerHand = playerHand.map((card) =>
       card["hold"] === true ? card : newDeck.pop()
@@ -262,13 +245,6 @@ dealBtn.addEventListener("click", () => {
 
     // Enable Bet Buttons
     enableAllBetBtns();
-    betBtns[0].classList.add("activeBtn");
-    // const betBtns = document.querySelectorAll(".betBtn");
-    // betBtns[0].classList.add("activeBtn");
-    // for (let i = 1; i < betBtns.length; i += 1) {
-    //   betBtns[i].disabled = false;
-    //   betBtns[i].classList.remove("activeBtn");
-    // }
   }
   return;
 });
@@ -280,6 +256,7 @@ let isPlaying = false;
 const toggleMusic = () => {
   if (isPlaying === false) {
     music.play();
+    music.loop = true;
     musicBtn.innerHTML = `<i class="fa fa-music"></i>`;
     isPlaying = true;
   } else {
