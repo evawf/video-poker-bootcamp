@@ -48,6 +48,18 @@ btnsDiv.append(dealBtn);
 const containerDiv = document.querySelector(".mainContainer");
 containerDiv.append(msgBoardDiv, handDiv, btnsDiv);
 
+// Point Divs
+const p0Div = document.querySelector(".p0");
+const p1Div = document.querySelector(".p1");
+const p2Div = document.querySelector(".p2");
+const p3Div = document.querySelector(".p3");
+const p4Div = document.querySelector(".p4");
+const p5Div = document.querySelector(".p5");
+const p6Div = document.querySelector(".p6");
+const p7Div = document.querySelector(".p7");
+const p8Div = document.querySelector(".p8");
+const p9Div = document.querySelector(".p9");
+
 // Animation Div
 const animationDiv = document.createElement("div");
 containerDiv.appendChild(animationDiv);
@@ -127,7 +139,6 @@ const toggleHold = (event) => {
   const cardElement = event.target;
   const index = cardElement.dataset.id;
   const holdImg = document.querySelectorAll(".holdImg");
-  // const cardDivs = document.querySelectorAll(".cardDiv");
   if (playerHand[index]["hold"] === true) {
     holdImg[index].src = "";
     playerHand[index]["hold"] = false;
@@ -188,6 +199,23 @@ const enableAllBetBtns = () => {
   }
 };
 
+const highlightPointDiv = (pointDiv) => {
+  return pointDiv.classList.add("activePoint");
+};
+
+const removeHighlightedPointDiv = () => {
+  p0Div.classList.remove("activePoint");
+  p1Div.classList.remove("activePoint");
+  p2Div.classList.remove("activePoint");
+  p3Div.classList.remove("activePoint");
+  p4Div.classList.remove("activePoint");
+  p5Div.classList.remove("activePoint");
+  p6Div.classList.remove("activePoint");
+  p7Div.classList.remove("activePoint");
+  p8Div.classList.remove("activePoint");
+  p9Div.classList.remove("activePoint");
+};
+
 // Deal btn event listener
 dealBtn.addEventListener("click", () => {
   if (mode === "deal") {
@@ -202,8 +230,10 @@ dealBtn.addEventListener("click", () => {
     }
     displayHand(playerHand);
     pointDiv.innerText = coins;
-    // // Disable Bet buttons
+    // Disable Bet buttons
     disableAllBetBtns();
+
+    removeHighlightedPointDiv();
   } else if (mode === "draw") {
     playerHand = playerHand.map((card) =>
       card["hold"] === true ? card : newDeck.pop()
@@ -222,24 +252,35 @@ dealBtn.addEventListener("click", () => {
     mode = "deal";
     dealBtn.innerText = "Deal";
     if (score === 0) {
+      // p0Div.classList.add("activePoint");
+      highlightPointDiv(p0Div);
       msgBoardDiv.innerText = "0 Point";
     } else if (score === 1) {
+      highlightPointDiv(p1Div);
       msgBoardDiv.innerText = `Jack or Better: + ${score * bet} Points`;
     } else if (score === 2) {
+      highlightPointDiv(p2Div);
       msgBoardDiv.innerText = `Two Pair: + ${score * bet} Points`;
     } else if (score === 3) {
+      highlightPointDiv(p3Div);
       msgBoardDiv.innerText = `Three of a Kind: + ${score * bet} Points`;
     } else if (score === 4) {
+      highlightPointDiv(p4Div);
       msgBoardDiv.innerText = `Straight: + ${score * bet} Points`;
     } else if (score === 5) {
+      highlightPointDiv(p5Div);
       msgBoardDiv.innerText = `Flush: + ${score * bet} Points`;
     } else if (score === 10) {
+      highlightPointDiv(p6Div);
       msgBoardDiv.innerText = `Full House: + ${score * bet} Points`;
     } else if (score === 25) {
+      highlightPointDiv(p7Div);
       msgBoardDiv.innerText = `Four of a Kind: + ${score * bet} Points`;
     } else if (score === 50) {
+      highlightPointDiv(p8Div);
       msgBoardDiv.innerText = `Straight Flush: + ${score * bet} Points`;
     } else if (score === 250) {
+      highlightPointDiv(p9Div);
       msgBoardDiv.innerText = `Royal Flush: + ${score * bet} Points`;
     }
 

@@ -260,7 +260,6 @@ img {
 
   .mainContainer {
     font-family: "Aclonica", sans-serif;
-
     width: 100%;
     height: 100%;
     background-size: cover;
@@ -279,5 +278,9 @@ img {
 
   .msgBoardDiv {
     margin: 2rem;
+  }
+
+  .activePoint {
+    color: green;
   }
 }
