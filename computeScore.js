@@ -6,7 +6,8 @@ const isRoyalFlush = (RankObj) => {
     RankObj[10] === 1 &&
     RankObj[11] === 1 &&
     RankObj[12] &&
-    RankObj[13] & sameSuit
+    RankObj[13] &&
+    isSameSuit(playerHand)
   )
     return true;
   return false;

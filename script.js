@@ -170,7 +170,8 @@ const displayHand = () => {
 };
 
 const betBtns = document.querySelectorAll(".betBtn");
-betBtns[0].classList.add("activeBtn");
+let activeBtn = betBtns[0];
+activeBtn.classList.add("activeBtn");
 betBtns.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     let clickedBtn = e.currentTarget;
@@ -182,6 +183,7 @@ betBtns.forEach((btn) => {
         betBtns[i].classList.remove("activeBtn");
       }
     }
+    activeBtn = clickedBtn;
   });
 });
 
@@ -199,10 +201,12 @@ const enableAllBetBtns = () => {
   }
 };
 
+// Highlight round point base
 const highlightPointDiv = (pointDiv) => {
   return pointDiv.classList.add("activePoint");
 };
 
+// Remove highlighted point
 const removeHighlightedPointDiv = () => {
   p0Div.classList.remove("activePoint");
   p1Div.classList.remove("activePoint");
@@ -221,11 +225,12 @@ dealBtn.addEventListener("click", () => {
   if (mode === "deal") {
     coins -= bet;
     playerHand = [];
+    console.log(newDeck.length);
+    if (newDeck.length < 5) {
+      newDeck = shuffleCards(makeDeck());
+    }
     // Add 5 cards to hand
     for (let i = 0; i < 5; i += 1) {
-      if (newDeck.length === 0) {
-        newDeck = shuffleCards(makeDeck());
-      }
       playerHand.push(newDeck.pop());
     }
     displayHand(playerHand);
@@ -252,7 +257,6 @@ dealBtn.addEventListener("click", () => {
     mode = "deal";
     dealBtn.innerText = "Deal";
     if (score === 0) {
-      // p0Div.classList.add("activePoint");
       highlightPointDiv(p0Div);
       msgBoardDiv.innerText = "0 Point";
     } else if (score === 1) {
@@ -286,6 +290,8 @@ dealBtn.addEventListener("click", () => {
 
     // Enable Bet Buttons
     enableAllBetBtns();
+    activeBtn = betBtns[0];
+    activeBtn.classList.add("activeBtn");
   }
   return;
 });
