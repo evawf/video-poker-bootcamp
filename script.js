@@ -225,8 +225,7 @@ dealBtn.addEventListener("click", () => {
   if (mode === "deal") {
     coins -= bet;
     playerHand = [];
-    console.log(newDeck.length);
-    if (newDeck.length < 5) {
+    if (newDeck.length < 10) {
       newDeck = shuffleCards(makeDeck());
     }
     // Add 5 cards to hand
@@ -240,6 +239,7 @@ dealBtn.addEventListener("click", () => {
 
     removeHighlightedPointDiv();
   } else if (mode === "draw") {
+    console.log(playerHand);
     playerHand = playerHand.map((card) =>
       card["hold"] === true ? card : newDeck.pop()
     );
