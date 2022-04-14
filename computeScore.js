@@ -1,5 +1,5 @@
 // Check if royal flush
-const isRoyalFlush = (RankObj) => {
+const isRoyalFlush = (RankObj, sameSuit) => {
   let keys = Object.keys(RankObj);
   if (
     RankObj[1] === 1 &&
@@ -7,7 +7,7 @@ const isRoyalFlush = (RankObj) => {
     RankObj[11] === 1 &&
     RankObj[12] &&
     RankObj[13] &&
-    isSameSuit(playerHand)
+    sameSuit
   )
     return true;
   return false;
@@ -79,7 +79,7 @@ const isSequential = (crtHand) => {
 
 // Check if three of a kind
 const isThree_of_a_kind = (RankObj) => {
-  let numOfTriplets = 0;
+  // let numOfTriplets = 0;
   let keys = Object.keys(RankObj);
   for (let i = 0; i < keys.length; i += 1) {
     if (RankObj[keys[i]] === 3) return true;
@@ -140,7 +140,7 @@ const calcHandScore = (playerHand) => {
   // let numOfKeys = Object.keys(sortedRankObj).length;
 
   // Royal Flush - 250 * bet
-  if (isRoyalFlush(sortedRankObj)) return 250;
+  if (isRoyalFlush(sortedRankObj, sameSuit)) return 250;
 
   // Straight Flush - 50 * bet
   if (sameSuit && seq) return 50;

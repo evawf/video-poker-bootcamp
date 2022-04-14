@@ -236,10 +236,8 @@ dealBtn.addEventListener("click", () => {
     pointDiv.innerText = coins;
     // Disable Bet buttons
     disableAllBetBtns();
-
     removeHighlightedPointDiv();
   } else if (mode === "draw") {
-    console.log(playerHand);
     playerHand = playerHand.map((card) =>
       card["hold"] === true ? card : newDeck.pop()
     );

@@ -241,22 +241,22 @@ let testCases = [
   //   expected: 3, // #3 triple
   // },
   // /*=========================================================================== */
-  // {
-  //   hand: [gc(13, 2), gc(11, 0), gc(12, 3), gc(1, 1), gc(10, 0)],
-  //   expected: 4, // #4 straight
-  // },
-  // {
-  //   hand: [gc(1, 2), gc(4, 0), gc(2, 3), gc(3, 1), gc(5, 0)],
-  //   expected: 4, // #4 straight
-  // },
-  // {
-  //   hand: [gc(8, 2), gc(6, 0), gc(9, 3), gc(7, 1), gc(5, 0)],
-  //   expected: 4, // #4 straight
-  // },
-  // {
-  //   hand: [gc(10, 2), gc(11, 0), gc(5, 3), gc(13, 1), gc(1, 0)],
-  //   expected: 0, // #4 straight
-  // },
+  {
+    hand: [gc(13, 2), gc(11, 0), gc(12, 3), gc(1, 1), gc(10, 0)],
+    expected: 4, // #4 straight
+  },
+  {
+    hand: [gc(1, 2), gc(4, 0), gc(2, 3), gc(3, 1), gc(5, 0)],
+    expected: 4, // #4 straight
+  },
+  {
+    hand: [gc(8, 2), gc(6, 0), gc(9, 3), gc(7, 1), gc(5, 0)],
+    expected: 4, // #4 straight
+  },
+  {
+    hand: [gc(10, 2), gc(11, 0), gc(5, 3), gc(13, 1), gc(1, 0)],
+    expected: 0, // #4 straight
+  },
   /*=========================================================================== */
   // {
   //   hand: [gc(6, 0), gc(9, 0), gc(8, 0), gc(6, 0), gc(10, 0)],
@@ -325,28 +325,28 @@ let testCases = [
   //   hand: [gc(1, 2), gc(3, 0), gc(2, 3), gc(5, 0), gc(4, 0)],
   //   expected: 4, // straight
   // },
-  /*=========================================================================== */
-  {
-    hand: [gc(10, 0), gc(11, 0), gc(1, 0), gc(13, 0), gc(12, 0)],
-    expected: 250, // #9 Royal Flush
-  },
-  {
-    hand: [gc(1, 1), gc(11, 0), gc(10, 1), gc(13, 1), gc(12, 1)],
-    expected: 4, // #9 Royal Flush
-  },
-  {
-    hand: [gc(12, 2), gc(11, 2), gc(10, 2), gc(13, 2), gc(1, 2)],
-    expected: 250, // #9 Royal Flush
-  },
-  {
-    hand: [gc(10, 3), gc(11, 3), gc(13, 3), gc(1, 3), gc(12, 3)],
-    expected: 250, // #9 Royal Flush
-  },
+  // /*=========================================================================== */
+  // {
+  //   hand: [gc(10, 0), gc(11, 0), gc(1, 0), gc(13, 0), gc(12, 0)],
+  //   expected: 250, // #9 Royal Flush
+  // },
+  // {
+  //   hand: [gc(1, 1), gc(11, 0), gc(10, 1), gc(13, 1), gc(12, 1)],
+  //   expected: 4, // #9 Royal Flush
+  // },
+  // {
+  //   hand: [gc(12, 2), gc(11, 2), gc(10, 2), gc(13, 2), gc(1, 2)],
+  //   expected: 250, // #9 Royal Flush
+  // },
+  // {
+  //   hand: [gc(10, 3), gc(11, 3), gc(13, 3), gc(1, 3), gc(12, 3)],
+  //   expected: 250, // #9 Royal Flush
+  // },
 
-  {
-    hand: [gc(10, 2), gc(11, 0), gc(5, 3), gc(13, 1), gc(1, 0)],
-    expected: 0, // high cards
-  },
+  // {
+  //   hand: [gc(10, 2), gc(11, 0), gc(5, 3), gc(13, 1), gc(1, 0)],
+  //   expected: 0, // high cards
+  // },
 ];
 
 for (let i = 0; i < testCases.length; i++) {
