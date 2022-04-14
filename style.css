@@ -14,11 +14,22 @@ body {
   height: auto;
   margin: 0;
   padding: 0;
+  font-family: "Aclonica", sans-serif !important;
+  background-color: black !important;
+  color: gold !important;
 }
 
 .logo-img {
   width: auto;
   height: 25px;
+}
+
+h2 {
+  color: red;
+}
+
+h5 {
+  color: red;
 }
 
 .mainContainer {
@@ -30,8 +41,24 @@ body {
 }
 
 .pointBoardDiv {
-  margin: 1rem 0;
+  margin: 1rem 1rem;
   font-size: 1rem;
+}
+
+.activePoint {
+  color: green;
+  border: 1px dotted green;
+  animation: blinkColor 0.5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes blinkColor {
+  from {
+    color: green;
+  }
+  to {
+    color: red;
+  }
 }
 
 .msgBoardDiv {
@@ -50,6 +77,37 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+  animation-timing-function: ease-in;
+}
+
+.cardDiv:nth-child(1) {
+  animation: movement 2s ease-in;
+}
+
+.cardDiv:nth-child(2) {
+  animation: movement 2.1s ease-in;
+}
+
+.cardDiv:nth-child(3) {
+  animation: movement 2.2s ease-in;
+}
+
+.cardDiv:nth-child(4) {
+  animation: movement 2.3s ease-in;
+}
+
+.cardDiv:nth-child(5) {
+  animation: movement 2.4s ease-in;
+}
+
+@keyframes movement {
+  from {
+    top: -250px;
+  }
+  to {
+    top: 0px;
+  }
 }
 
 .card {
@@ -69,4 +127,136 @@ body {
   justify-content: center;
   align-items: center;
   margin: 1rem 0;
+}
+
+.coinContainer {
+  height: 2rem;
+  color: red;
+  width: auto;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.coinImgDiv {
+  width: 4rem;
+  height: 4rem;
+  background: url(imgs/coins.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.betBtnContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+  height: 4rem;
+}
+
+.betBtn {
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  margin: 0 0.8rem;
+  background-size: cover;
+  border: 1px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.betBtn:hover {
+  border: 3px solid gold;
+}
+
+#betBtn0 {
+  background: url(imgs/chip0.png);
+  background-size: cover;
+  color: black;
+}
+
+#betBtn1 {
+  background: url(imgs/chip1.png);
+  background-size: contain;
+  color: red;
+}
+
+#betBtn2 {
+  background: url(imgs/chip2.png);
+  background-size: contain;
+  color: blue;
+}
+
+#betBtn3 {
+  background: url(imgs/chip3.png);
+  background-size: contain;
+  color: green;
+}
+
+#betBtn4 {
+  background: url(imgs/chip4.png);
+  background-size: contain;
+  color: gold;
+}
+
+.dealBtn {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  border: 5px solid darkgoldenrod;
+  background-color: gold;
+  color: black;
+  font-family: "Aclonica", sans-serif;
+}
+
+.dealBtn:hover {
+  border: 5px solid silver;
+}
+
+.dealBtn:hover {
+  border: 5px solid silver;
+}
+
+.activeBtn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 2px solid gold;
+}
+
+@media only screen and (min-width: 1024px) {
+  .handDiv {
+    height: 15rem;
+  }
+
+  .card {
+    height: 10rem;
+    width: auto;
+    margin: 0 0.5rem;
+  }
+
+  .holdImg {
+    width: 5rem;
+  }
+
+  .btnsDiv {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .coinContainer {
+    height: 5rem;
+  }
+
+  .coinImgDiv {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .betBtnContainer {
+    margin: 0 2rem;
+  }
 }
