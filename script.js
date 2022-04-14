@@ -259,7 +259,7 @@ dealBtn.addEventListener("click", () => {
       msgBoardDiv.innerText = "0 Point";
     } else if (score === 1) {
       highlightPointDiv(p1Div);
-      msgBoardDiv.innerText = `Jack or Better: + ${score * bet} Points`;
+      msgBoardDiv.innerText = `Jacks or Better: + ${score * bet} Points`;
     } else if (score === 2) {
       highlightPointDiv(p2Div);
       msgBoardDiv.innerText = `Two Pair: + ${score * bet} Points`;

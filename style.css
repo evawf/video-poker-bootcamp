@@ -13,16 +13,12 @@ body {
   background-color: gray !important;
 }
 
-h5 {
-  font-size: small !important;
-}
-
 .mainContainer {
   height: 100vh;
   margin: 5px;
   background-color: black;
   border-radius: 5px;
-  padding-top: 10px;
+  padding-top: 50px;
 }
 
 .pointBoardDiv {
@@ -39,11 +35,11 @@ h5 {
   align-items: center;
   justify-content: center;
   height: 150px;
-  margin-top: 10px;
+  margin-top: 40px;
 }
 
 .card {
-  height: 70px;
+  height: 110px;
   margin: 0 5px;
   width: auto;
 }
@@ -67,6 +63,7 @@ img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 30px;
 }
 
 .coinContainer {
@@ -377,12 +374,44 @@ img {
 }
 
 @media only screen and (min-width: 768px) {
+  html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    margin: 0;
+    padding: 0.5rem 0.5rem;
+    height: 100%;
+    background-color: green !important;
+  }
+
+  h2 {
+    padding: 0;
+    margin-top: 20px;
+  }
+
   .pointBoardDiv {
-    display: block;
+    display: none;
   }
 
   .mainContainer {
-    background-color: black;
+    font-family: "Aclonica", sans-serif;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    color: gold;
+    padding-top: 4rem;
+    border-radius: 1.8rem;
+  }
+
+  .dealBtn {
+    margin-top: 0;
   }
 }
 
@@ -405,8 +434,13 @@ img {
     margin-top: 20px;
   }
 
+  img {
+    width: 30px;
+  }
+
   .pointBoardDiv {
     display: block;
+    font-size: large;
   }
 
   .mainContainer {
@@ -445,5 +479,9 @@ img {
 
   .card {
     height: 150px;
+  }
+
+  .dealBtn {
+    margin-top: 0;
   }
 }
