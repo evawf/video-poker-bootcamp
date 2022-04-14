@@ -316,10 +316,7 @@ img {
     flex-direction: column;
     align-items: center;
     position: relative;
-    /* transition: transform 0.8s; */
-    /* transform-style: preserve-3d; */
-    animation-timing-function: ease-in;
-    /* animation: movement 2s ease-in; */
+    /* animation-timing-function: ease-in; */
   }
 
   .cardDiv:nth-child(1) {
@@ -354,11 +351,6 @@ img {
     border-radius: 3px;
   }
 
-  #playMusic {
-    /* width: 50%;
-    padding-left: 75%; */
-  }
-
   @keyframes movement {
     from {
       top: -50px;
@@ -384,7 +376,7 @@ img {
     margin: 0;
     padding: 0.5rem 0.5rem;
     height: 100%;
-    background-color: green !important;
+    background-color: black !important;
   }
 
   h2 {
@@ -397,9 +389,6 @@ img {
   }
 
   .mainContainer {
-    font-family: "Aclonica", sans-serif;
-    width: 100%;
-    height: 100%;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -407,7 +396,6 @@ img {
     padding: 0;
     color: gold;
     padding-top: 4rem;
-    border-radius: 1.8rem;
   }
 
   .dealBtn {
@@ -467,6 +455,18 @@ img {
 
   .activePoint {
     color: green;
+    border: 1px dotted green;
+    animation: blinkColor 0.5s;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes blinkColor {
+    from {
+      color: green;
+    }
+    to {
+      color: red;
+    }
   }
 
   .handDiv {
