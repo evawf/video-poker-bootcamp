@@ -69,8 +69,10 @@ const isSequential = (crtHand) => {
   }
   if (
     crtHand[0].rank === 1 &&
-    Math.max(...rankArr) === 13 &&
-    Math.min(...rankArr) === 10
+    crtHand[1].rank === 10 &&
+    crtHand[2].rank === 11 &&
+    crtHand[3].rank === 12 &&
+    crtHand[4].rank === 13
   )
     seq = true;
 
@@ -124,6 +126,7 @@ const isJackOrBetter = (rankObj) => {
 // Check player hand point
 const calcHandScore = (playerHand) => {
   let playerCrtHand = [...playerHand];
+  console.log(playerCrtHand);
   let sortedRankObj = {};
   for (let idx = 0; idx < playerCrtHand.length; idx += 1) {
     let rank = playerCrtHand[idx].rank;
@@ -168,3 +171,43 @@ const calcHandScore = (playerHand) => {
 
   return 0;
 };
+
+console.log(
+  calcHandScore([
+    {
+      name: "ace",
+      suit: "spades",
+      suitsSymbol: "♣︎",
+      rank: 1,
+      img: "imgs/2_of_spades.png",
+    },
+    {
+      name: "jack",
+      suit: "diamonds",
+      suitsSymbol: "♦︎",
+      rank: 11,
+      img: "imgs/5_of_diamonds.png",
+    },
+    {
+      name: "queen",
+      suit: "spades",
+      suitsSymbol: "♣︎",
+      rank: 12,
+      img: "imgs/6_of_spades.png",
+    },
+    {
+      name: "10",
+      suit: "clubs",
+      suitsSymbol: "♣︎",
+      rank: 10,
+      img: "imgs/6_of_clubs.png",
+    },
+    {
+      name: "jack",
+      suit: "spades",
+      suitsSymbol: "♣︎",
+      rank: 11,
+      img: "imgs/jack_of_spades.png",
+    },
+  ])
+);

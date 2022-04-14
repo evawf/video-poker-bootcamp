@@ -41,8 +41,10 @@ const isSequential = (playerHand) => {
 
   if (
     playerHand[0].rank === 1 &&
-    Math.max(...rankArr) === 13 &&
-    Math.min(...rankArr) === 10
+    playerHand[1].rank === 10 &&
+    playerHand[2].rank === 11 &&
+    playerHand[3].rank === 12 &&
+    playerHand[4].rank === 13
   )
     seq = true;
 
@@ -51,20 +53,20 @@ const isSequential = (playerHand) => {
 
 let testCases = [
   {
-    hand: [gc(1, 0), gc(2, 0), gc(3, 0), gc(4, 0), gc(5, 0)],
-    expected: true,
+    hand: [gc(10, 0), gc(1, 0), gc(11, 0), gc(11, 0), gc(13, 0)],
+    expected: false,
   },
   {
-    hand: [gc(6, 0), gc(2, 0), gc(3, 0), gc(4, 0), gc(5, 0)],
-    expected: true,
+    hand: [gc(10, 0), gc(1, 0), gc(10, 0), gc(11, 0), gc(9, 0)],
+    expected: false,
   },
   {
     hand: [gc(10, 0), gc(2, 0), gc(3, 0), gc(4, 0), gc(5, 0)],
     expected: false,
   },
   {
-    hand: [gc(1, 0), gc(11, 0), gc(12, 0), gc(13, 0), gc(10, 0)],
-    expected: true,
+    hand: [gc(10, 0), gc(11, 0), gc(10, 0), gc(1, 0), gc(10, 0)],
+    expected: false,
   },
   {
     hand: [gc(6, 0), gc(9, 0), gc(8, 0), gc(6, 0), gc(10, 0)],
