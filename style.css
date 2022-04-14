@@ -237,6 +237,9 @@ img {
 }
 
 @media only screen and (min-width: 768px) {
+  .mainContainer {
+    background-color: black;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -281,5 +284,17 @@ img {
 
   .activePoint {
     color: green;
+  }
+
+  .handDiv {
+    height: 180px;
+  }
+
+  .holdImg {
+    width: 50px;
+  }
+
+  .card {
+    height: 150px;
   }
 }
