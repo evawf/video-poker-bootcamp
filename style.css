@@ -24,6 +24,11 @@ body {
   /* background-color: black !important; */
   color: gold !important;
   background-color: transparent !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
 }
 
 @keyframes movingBg {
@@ -43,6 +48,7 @@ h5 {
 }
 
 .mainContainer {
+  /* position: absolute; */
   display: flex;
   flex-direction: column;
   justify-content: center;

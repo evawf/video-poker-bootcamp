@@ -187,6 +187,7 @@ betBtns.forEach((btn) => {
   });
 });
 
+// Disable Bet Buttons
 const disableAllBetBtns = () => {
   for (let i = 0; i < betBtns.length; i += 1) {
     betBtns[i].disabled = true;
@@ -194,6 +195,7 @@ const disableAllBetBtns = () => {
   }
 };
 
+// Enable Bet Buttons
 const enableAllBetBtns = () => {
   for (let i = 0; i < betBtns.length; i += 1) {
     betBtns[i].disabled = false;
