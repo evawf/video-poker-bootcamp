@@ -9,44 +9,38 @@ let coins = 100;
 let bet = 1;
 let mode = "deal";
 
-const msgBoardDiv = document.createElement("div");
-msgBoardDiv.className = "msgBoardDiv";
-msgBoardDiv.innerText = "Tap Deal to play";
+const msgBoardDiv = document.getElementsByClassName("msgBoardDiv")[0];
+const handDiv = document.getElementsByClassName("handDiv")[0];
+const pointDiv = document.getElementsByClassName("pointDiv")[0];
+// const coinImgDiv = document.createElement("div");
+// coinImgDiv.className = "coinImgDiv";
+// const pointDiv = document.createElement("div");
+// pointDiv.className = "pointDiv";
+// const coinContainer = document.createElement("div");
+// coinContainer.className = "coinContainer";
+// coinContainer.append(coinImgDiv, pointDiv);
+// const btnsDiv = document.createElement("div");
+// const betBtnContainer = document.createElement("div");
+// betBtnContainer.className = "betBtnContainer";
+// btnsDiv.className = "btnsDiv";
+// btnsDiv.append(coinContainer);
+// for (let i = 0; i < 5; i += 1) {
+//   const btn = document.createElement("button");
+//   btn.className = "betBtn";
+//   btn.id = `betBtn${i}`;
+//   btn.innerText = i + 1;
+//   betBtnContainer.append(btn);
+// }
+// btnsDiv.append(betBtnContainer);
+//
+//const dealBtn = document.createElement("button");
+//dealBtn.className = "dealBtn";
+//dealBtn.id = "dealBtn";
+//dealBtn.innerText = "Deal";
 
-const handDiv = document.createElement("div");
-handDiv.className = "handDiv";
-
-const coinImgDiv = document.createElement("div");
-coinImgDiv.className = "coinImgDiv";
-const pointDiv = document.createElement("div");
-pointDiv.className = "pointDiv";
-
-const coinContainer = document.createElement("div");
-coinContainer.className = "coinContainer";
-coinContainer.append(coinImgDiv, pointDiv);
-
-const btnsDiv = document.createElement("div");
-const betBtnContainer = document.createElement("div");
-betBtnContainer.className = "betBtnContainer";
-btnsDiv.className = "btnsDiv";
-btnsDiv.append(coinContainer);
-for (let i = 0; i < 5; i += 1) {
-  const btn = document.createElement("button");
-  btn.className = "betBtn";
-  btn.id = `betBtn${i}`;
-  btn.innerText = i + 1;
-  betBtnContainer.append(btn);
-}
-btnsDiv.append(betBtnContainer);
-
-const dealBtn = document.createElement("button");
-dealBtn.className = "dealBtn";
-dealBtn.id = "dealBtn";
-dealBtn.innerText = "Deal";
-
-btnsDiv.append(dealBtn);
-const containerDiv = document.querySelector(".mainContainer");
-containerDiv.append(msgBoardDiv, handDiv, btnsDiv);
+//btnsDiv.append(dealBtn);
+//const containerDiv = document.querySelector(".mainContainer");
+//containerDiv.append(btnsDiv);
 
 // Point Divs
 const p0Div = document.querySelector(".p0");
@@ -61,11 +55,10 @@ const p8Div = document.querySelector(".p8");
 const p9Div = document.querySelector(".p9");
 
 // Animation Div
-const animationDiv = document.createElement("div");
-containerDiv.appendChild(animationDiv);
-animationDiv.className = "animationDiv";
-animationDiv.style = "postion:absolute; ";
-
+// const animationDiv = document.createElement("div");
+// containerDiv.appendChild(animationDiv);
+// animationDiv.className = "animationDiv";
+// animationDiv.style = "postion:absolute; ";
 /*
 =====================================
 Shuffled Deck
@@ -119,19 +112,19 @@ Game logic
 
 const initGame = () => {
   // Display cards back
-  for (let i = 0; i < 5; i += 1) {
-    const cardDiv = document.createElement("div");
-    cardDiv.className = "cardDiv";
-    const cardImg = document.createElement("img");
-    cardImg.id = `cardImg${i}`;
-    cardImg.className = "card";
-    cardImg.src = "imgs/Bull-Dog-Squeezers-Red.png";
-    const holdImg = document.createElement("img");
-    holdImg.className = "holdImg";
-    cardDiv.appendChild(cardImg);
-    cardDiv.appendChild(holdImg);
-    handDiv.appendChild(cardDiv);
-  }
+  // for (let i = 0; i < 5; i += 1) {
+  //   const cardDiv = document.createElement("div");
+  //   cardDiv.className = "cardDiv";
+  //   const cardImg = document.createElement("img");
+  //   cardImg.id = `cardImg${i}`;
+  //   cardImg.className = "card";
+  //   cardImg.src = "imgs/Bull-Dog-Squeezers-Red.png";
+  //   const holdImg = document.createElement("img");
+  //   holdImg.className = "holdImg";
+  //   cardDiv.appendChild(cardImg);
+  //   cardDiv.appendChild(holdImg);
+  //   handDiv.appendChild(cardDiv);
+  // }
   pointDiv.innerText = coins;
 };
 
