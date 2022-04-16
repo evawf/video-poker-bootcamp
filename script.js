@@ -142,7 +142,7 @@ const toggleHold = (event) => {
 };
 
 const holdCard = () => {
-  const cardImgs = document.querySelectorAll(".card");
+  const cardImgs = document.querySelectorAll(".front .card");
   for (let i = 0; i < playerHand.length; i += 1) {
     cardImgs[i].addEventListener("click", toggleHold);
   }
@@ -151,10 +151,12 @@ const holdCard = () => {
 // Handle Deal function
 const displayHand = () => {
   //Display 5 cards' images
-  const cardImgs = document.querySelectorAll(".card");
+  const cardImgs = document.querySelectorAll(".cardDiv");
   for (let i = 0; i < cardImgs.length; i += 1) {
-    cardImgs[i].src = `${playerHand[i].img}`;
-    cardImgs[i].dataset.id = i;
+    cardImgs[i].classList.add("faceup");
+    let c = cardImgs[i].querySelector(".front .card");
+    c.src = `${playerHand[i].img}`;
+    c.dataset.id = i;
   }
   holdCard();
   mode = "draw";
@@ -236,7 +238,7 @@ dealBtn.addEventListener("click", () => {
     playerHand = playerHand.map((card) =>
       card["hold"] === true ? card : newDeck.pop()
     );
-    const cardImgs = document.querySelectorAll(".card");
+    const cardImgs = document.querySelectorAll(".front .card");
     const holdImg = document.querySelectorAll(".holdImg");
     for (let i = 0; i < cardImgs.length; i += 1) {
       cardImgs[i].src = `${playerHand[i].img}`;

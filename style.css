@@ -86,16 +86,53 @@ h5 {
   display: flex;
   flex-direction: row;
   margin: 1rem 0;
-  height: 10rem;
+  /* height: 10rem; */
 }
 
+.holdImg {
+  position: absolute;
+  bottom: 0px;
+}
 .cardDiv {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  animation-timing-function: ease-in;
+  width: 90px;
+  height: 150px;
+  perspective: 1000px;
+  /* animation-timing-function: ease-in; */
+}
+
+.cardDiv .front,
+.cardDiv .back {
+  position: absolute;
+  backface-visibility: hidden;
+  width: 90px;
+  height: 150px;
+}
+
+.flipper {
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 90px;
+  height: 150px;
+}
+
+.cardDiv .front {
+  transform: rotateY(180deg);
+}
+
+.cardDiv .back {
+  transform: rotateY(0deg);
+}
+
+.cardDiv.faceup .flipper {
+  transform: rotateY(180deg);
 }
 
 .cardDiv:nth-child(1) {
@@ -121,9 +158,11 @@ h5 {
 @keyframes movement {
   from {
     top: -250px;
+    opacity: 0;
   }
   to {
     top: 0px;
+    opacity: 1;
   }
 }
 
