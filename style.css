@@ -99,18 +99,15 @@ h5 {
   justify-content: center;
   align-items: center;
   position: relative;
-  width: 90px;
-  height: 150px;
+  width: auto;
   perspective: 1000px;
-  /* animation-timing-function: ease-in; */
+  animation-timing-function: ease-in;
 }
 
 .cardDiv .front,
 .cardDiv .back {
   position: absolute;
   backface-visibility: hidden;
-  width: 90px;
-  height: 150px;
 }
 
 .flipper {
@@ -120,7 +117,7 @@ h5 {
   top: 0;
   left: 0;
   width: 90px;
-  height: 150px;
+  height: 10rem;
 }
 
 .cardDiv .front {
@@ -285,7 +282,7 @@ h5 {
 
 @media only screen and (min-width: 1024px) {
   .handDiv {
-    height: 15rem;
+    height: 14rem;
   }
 
   .card {
@@ -314,5 +311,10 @@ h5 {
 
   .betBtnContainer {
     margin: 0 2rem;
+  }
+
+  .flipper {
+    width: 120px;
+    height: 14rem;
   }
 }
