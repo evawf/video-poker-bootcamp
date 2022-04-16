@@ -183,12 +183,12 @@ const displayHand = () => {
 
 const betBtns = document.querySelectorAll(".betBtn");
 let activeBtn;
-console.log(activeBtn);
 betBtns.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     let clickedBtn = e.currentTarget;
     clickedBtn.classList.add("activeBtn");
     bet = clickedBtn.innerText;
+    dealBtn.disabled = false;
     royalFlushPointDiv.innerText = `${bet * 250}`;
     straightFlushPointDiv.innerText = `${bet * 50}`;
     fourOfAKindPointDiv.innerText = `${bet * 25}`;
@@ -207,7 +207,6 @@ betBtns.forEach((btn) => {
     activeBtn = clickedBtn;
   });
 });
-dealBtn.disabled = false;
 
 // Disable Bet Buttons
 const disableAllBetBtns = () => {
@@ -311,8 +310,7 @@ dealBtn.addEventListener("click", () => {
 
     // Enable Bet Buttons
     enableAllBetBtns();
-    // activeBtn = betBtns[0];
-    // activeBtn.classList.add("activeBtn");
+    dealBtn.disabled = true;
   }
   return;
 });
