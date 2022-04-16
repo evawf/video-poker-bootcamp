@@ -11,7 +11,7 @@ let mode = "deal";
 
 const msgBoardDiv = document.createElement("div");
 msgBoardDiv.className = "msgBoardDiv";
-msgBoardDiv.innerText = "Tap Deal to play";
+msgBoardDiv.innerText = "Choose your bet then tap 'Deal' to play";
 
 const handDiv = document.createElement("div");
 handDiv.className = "handDiv";
@@ -43,6 +43,7 @@ const dealBtn = document.createElement("button");
 dealBtn.className = "dealBtn";
 dealBtn.id = "dealBtn";
 dealBtn.innerText = "Deal";
+dealBtn.disabled = true;
 
 btnsDiv.append(dealBtn);
 const containerDiv = document.querySelector(".mainContainer");
@@ -59,6 +60,16 @@ const p6Div = document.querySelector(".p6");
 const p7Div = document.querySelector(".p7");
 const p8Div = document.querySelector(".p8");
 const p9Div = document.querySelector(".p9");
+
+const royalFlushPointDiv = document.getElementById("royalFlush");
+const straightFlushPointDiv = document.getElementById("straightFlush");
+const fourOfAKindPointDiv = document.getElementById("fourOfAKind");
+const fullHousePointDiv = document.getElementById("fullHouse");
+const flushPointDiv = document.getElementById("flush");
+const straightPointDiv = document.getElementById("straight");
+const threeOfAKindPointDiv = document.getElementById("threeOfAKind");
+const twoPairPointDiv = document.getElementById("twoPair");
+const jacksOrBetterPointDiv = document.getElementById("jacksOrBetter");
 
 // Animation Div
 const animationDiv = document.createElement("div");
@@ -133,6 +144,7 @@ const initGame = () => {
     handDiv.appendChild(cardDiv);
   }
   pointDiv.innerText = coins;
+  // selectBet();
 };
 
 const toggleHold = (event) => {
@@ -170,14 +182,23 @@ const displayHand = () => {
 };
 
 const betBtns = document.querySelectorAll(".betBtn");
-let activeBtn = betBtns[0];
-activeBtn.classList.add("activeBtn");
+let activeBtn;
+console.log(activeBtn);
 betBtns.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     let clickedBtn = e.currentTarget;
     clickedBtn.classList.add("activeBtn");
     bet = clickedBtn.innerText;
-    console.log(bet);
+    royalFlushPointDiv.innerText = `${bet * 250}`;
+    straightFlushPointDiv.innerText = `${bet * 50}`;
+    fourOfAKindPointDiv.innerText = `${bet * 25}`;
+    fullHousePointDiv.innerText = `${bet * 10}`;
+    flushPointDiv.innerText = `${bet * 5}`;
+    straightPointDiv.innerText = `${bet * 4}`;
+    threeOfAKindPointDiv.innerText = `${bet * 3}`;
+    twoPairPointDiv.innerText = `${bet * 2}`;
+    jacksOrBetterPointDiv.innerText = `${bet * 1}`;
+
     for (let i = 0; i < betBtns.length; i += 1) {
       if (betBtns[i] !== clickedBtn) {
         betBtns[i].classList.remove("activeBtn");
@@ -186,12 +207,12 @@ betBtns.forEach((btn) => {
     activeBtn = clickedBtn;
   });
 });
+dealBtn.disabled = false;
 
 // Disable Bet Buttons
 const disableAllBetBtns = () => {
   for (let i = 0; i < betBtns.length; i += 1) {
     betBtns[i].disabled = true;
-    betBtns[i].style = "background-color: gray";
   }
 };
 
@@ -290,8 +311,8 @@ dealBtn.addEventListener("click", () => {
 
     // Enable Bet Buttons
     enableAllBetBtns();
-    activeBtn = betBtns[0];
-    activeBtn.classList.add("activeBtn");
+    // activeBtn = betBtns[0];
+    // activeBtn.classList.add("activeBtn");
   }
   return;
 });
