@@ -24,5 +24,3 @@ const isSequential = (playerHand) => {
 
   return seq;
 };
-
-// export { isSequential };

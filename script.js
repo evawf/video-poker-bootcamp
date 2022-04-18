@@ -144,7 +144,6 @@ const initGame = () => {
     handDiv.appendChild(cardDiv);
   }
   pointDiv.innerText = coins;
-  // selectBet();
 };
 
 const toggleHold = (event) => {
@@ -181,6 +180,7 @@ const displayHand = () => {
   msgBoardDiv.innerText = "Click cards to HOLD";
 };
 
+// Handle bet button click
 const betBtns = document.querySelectorAll(".betBtn");
 let activeBtn;
 betBtns.forEach((btn) => {

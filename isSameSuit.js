@@ -9,5 +9,3 @@ const isSameSuit = (playerHand) => {
   }
   return sameSuit;
 };
-
-// export { isSameSuit };
